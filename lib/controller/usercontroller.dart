@@ -9,6 +9,7 @@ class userController{
 
   String url='https://winner-api.herokuapp.com/api';
   String token='';
+  bool state;
   ////login
   Loginuser(String name,String pass)async{
     String myUrl='$url/login';
@@ -26,7 +27,7 @@ class userController{
 
      );
      var data = json.decode(res.body);
-
+      state=data['success'];
      token=data["data"]["token"];
      print(token);
      await save(token);
@@ -57,16 +58,19 @@ class userController{
   deleteuser(int id)async{
     String myUrl='$url/deleteUser/$id';
     String t=await read();
-    print(t);
-    http.Response res =await http.post(myUrl,
-      headers: {
-        'Accept':'application/json',
-        'Authorization':'Bearer $t'
-      }
-    );
-  var data=json.decode(res.body);
-  print (token);
-print(data);
+    print('token is $t');
+    try{
+      http.Response res =await http.post(myUrl,
+          headers: {
+            'Accept':'application/json',
+            'Authorization':'Bearer $t'
+          }
+      );
+      var data=json.decode(res.body);
+      print (token);
+      print(data);
+    }
+    catch(e){}
 }
 ////show all users
   showusers()async{
@@ -108,7 +112,7 @@ print(data);
   read() async {
     final pret = await SharedPreferences.getInstance();
     final key = 'tokenn';
-    String value = pret.get(key)?? '';
+    String value = pret.get(key)?? 'kkk';
     print('read : $value') ;
     return value;
   }

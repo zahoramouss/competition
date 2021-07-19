@@ -14,6 +14,17 @@ class login extends StatefulWidget{
 class loginstate extends State<login>{
   TextEditingController username=TextEditingController();
   TextEditingController password=TextEditingController();
+  userController us=userController();
+  log()async{
+  if(username.text.trim().isNotEmpty&&password.text.trim().isNotEmpty){
+    us.Loginuser(username.text.trim(),password.text.trim()).whenComplete((){
+     if(us.state){
+       Navigator.of(context).pushNamedAndRemoveUntil('/url',(Route<dynamic>route)=>false);
+     }
+    });
+  }
+  else{}
+  }
   @override
   Widget build(BuildContext context) {
     double tw=MediaQuery.of(context).size.width*.73;
@@ -108,7 +119,7 @@ class loginstate extends State<login>{
                        color: white,)
                  ),),
                  Textfield(context,password),
-                    Container(
+                /*    Container(
                       //margin: EdgeInsets.only(top:m6),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -136,7 +147,7 @@ class loginstate extends State<login>{
 
                         ],
                       ),
-                    ),
+                    ),*/
                ////button
                Container(
                  margin: EdgeInsets.only(top: m7),
@@ -149,9 +160,8 @@ class loginstate extends State<login>{
                        borderRadius: new BorderRadius.circular(radius1),
                         side:BorderSide(color: white, width: 1),
                      ),
-                     onPressed: ()async{
-                       userController ty=userController();
-                       await ty.deleteuser(5);
+                     onPressed: (){
+                       log();
                      },
                      child:Text(str_login,style: TextStyle(
                        fontSize: 30,

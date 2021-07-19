@@ -2,7 +2,7 @@ import 'dart:ui';
 import '../widgets/widget.dart';
 import 'package:flutter/material.dart';
 import '../Resources/Strings.dart';
-import '../Resources/resourses.dart';
+
 class option extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
@@ -10,6 +10,7 @@ class option extends StatefulWidget{
   }
   }
   class optionstate extends State<option>{
+
   @override
   Widget build(BuildContext context) {
     double m1=MediaQuery.of(context).size.height*.0592;
@@ -33,9 +34,9 @@ class option extends StatefulWidget{
         children: [
           back(context,m1),
           title(context,str_options,m2),
-          button(context,str_adduser,m3),
-          button(context,str_adminchangepass,m4),
-          button(context,str_showusers,m4),
+          button(context,str_adduser,m3,1),
+          button(context,str_adminchangepass,m4,2),
+          button(context,str_showusers,m4,3),
           Container(
             margin:EdgeInsets.only(top: m5),
             child: Image.asset('assets/images/admin.png'),

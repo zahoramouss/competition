@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../Resources/Strings.dart';
+
 import '../Resources/resourses.dart';
 
 Widget Textfield(context,TextEditingController t){
@@ -71,7 +71,7 @@ Widget title(context,String t,double m){
     ),),
   );
 }
-Widget button(context,String t,double m){
+Widget button(context,String t,double m,int choice){
   double tw=MediaQuery.of(context).size.width*.7412;
   double th=MediaQuery.of(context).size.height*.0706;
   return Container(
@@ -84,7 +84,12 @@ Widget button(context,String t,double m){
     borderRadius: new BorderRadius.circular(radius1),
     side:BorderSide(color: white, width: 1),
   ),
-      onPressed: (){},
+      onPressed: (){
+        switch(choice){
+
+        }
+
+      },
       child:Text(t,
      textAlign: TextAlign.right,
     style: TextStyle(

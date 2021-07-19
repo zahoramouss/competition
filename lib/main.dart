@@ -22,7 +22,8 @@ runApp(MaterialApp(
     '/login':(BuildContext context)=>login(),
     '/adduser':(BuildContext context)=>adduser(),
     '/options':(BuildContext conytext)=>option(),
-
+     '/url':(BuildContext context)=>url(),
+      '/win':(BuildContext context)=>winner(),
   }
 ));
 }

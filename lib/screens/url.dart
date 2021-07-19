@@ -39,7 +39,9 @@ class urlstate extends State<url>{
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
 
-              IconButton(icon: Image.asset('assets/images/para.png'), onPressed: (){}),
+              IconButton(icon: Image.asset('assets/images/para.png'), onPressed: (){
+                Navigator.of(context).pushNamedAndRemoveUntil('/options',(Route<dynamic>route)=>false);
+              }),
              title(context,str_title,m2),
               back(context,0),
 
@@ -102,7 +104,9 @@ class urlstate extends State<url>{
             borderRadius: new BorderRadius.circular(radius1),
             side:BorderSide(color: white, width: 1),
           ),
-          onPressed: (){},
+          onPressed: (){
+            Navigator.of(context).pushNamedAndRemoveUntil('/winner',(Route<dynamic>route)=>false);
+          },
           child:Text(str_keep,
             textAlign: TextAlign.right,
             style: TextStyle(
