@@ -24,6 +24,8 @@ runApp(MaterialApp(
     '/options':(BuildContext conytext)=>option(),
      '/url':(BuildContext context)=>url(),
       '/win':(BuildContext context)=>winner(),
+    '/changepass':(BuildContext context)=>changepass(),
+    '/users':(BuildContext context)=>showusers(),
   }
 ));
 }

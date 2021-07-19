@@ -86,6 +86,15 @@ Widget button(context,String t,double m,int choice){
   ),
       onPressed: (){
         switch(choice){
+          case 1:
+            Navigator.of(context).pushNamedAndRemoveUntil('/adduser',(Route<dynamic>route)=>false);
+            break;
+          case 2:
+            Navigator.of(context).pushNamedAndRemoveUntil('/changepass',(Route<dynamic>route)=>false);
+            break;
+          case 3:
+            Navigator.of(context).pushNamedAndRemoveUntil('/users',(Route<dynamic>route)=>false);
+            break;
 
         }
 
