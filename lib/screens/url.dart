@@ -62,12 +62,13 @@ class urlstate extends State<url>{
           margin: EdgeInsets.only(top: m3),
           child: TextField(
             controller: t,
+
             textAlign: TextAlign.center,
             decoration: InputDecoration(
               hintText: str_url,
-
+              contentPadding: EdgeInsets.zero,
               hintStyle: TextStyle(
-               
+
                 fontFamily: font,
                 color: white,
                 fontSize: 30
