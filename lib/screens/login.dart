@@ -3,6 +3,7 @@ import '../widgets/widget.dart';
 import 'package:flutter/material.dart';
 import '../Resources/Strings.dart';
 import '../Resources/resourses.dart';
+import '../controller/usercontroller.dart';
 class login extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
@@ -148,7 +149,10 @@ class loginstate extends State<login>{
                        borderRadius: new BorderRadius.circular(radius1),
                         side:BorderSide(color: white, width: 1),
                      ),
-                     onPressed: (){},
+                     onPressed: ()async{
+                       userController ty=userController();
+                       await ty.deleteuser(5);
+                     },
                      child:Text(str_login,style: TextStyle(
                        fontSize: 30,
                        fontFamily: font,

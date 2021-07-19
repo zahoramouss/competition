@@ -8,13 +8,22 @@ import 'screens/url.dart';
 import 'screens/getwinner.dart';
 import 'screens/rinstegramurl.dart';
 import 'screens/giftrules.dart';
+import 'controller/usercontroller.dart';
 
-void main() {
+void main()async {
+  //userController ty=userController();
+ //await ty.deleteuser(5);
 runApp(MaterialApp(
 
-  home: integramurl(),
+  home: login(),
   routes: {
-  '/home': (BuildContext context) => winner(),}
+    '/compet': (BuildContext context) => winner(),
+    '/giftrule':(BuildContext context)=> gift(),
+    '/login':(BuildContext context)=>login(),
+    '/adduser':(BuildContext context)=>adduser(),
+    '/options':(BuildContext conytext)=>option(),
+
+  }
 ));
 }
 

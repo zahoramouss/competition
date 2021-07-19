@@ -1,8 +1,11 @@
+import 'dart:io';
 import 'dart:ui';
 import '../widgets/widget.dart';
 import 'package:flutter/material.dart';
 import '../Resources/Strings.dart';
 import '../Resources/resourses.dart';
+import '../models/champion.dart';
+import 'package:image_picker/image_picker.dart';
 class winner extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
@@ -12,6 +15,23 @@ class winner extends StatefulWidget{
 }
 class winnerstate extends State<winner>{
   List l=[false, false,false, false,false, false,false, false,false, false,false, false];
+  List<Competitor> y=[Competitor('@hamied','hi',false,null),Competitor('@zaho','goodluck',false,null),Competitor('@aymen','hi',false,null),Competitor('@mohamed','takecre',false,null),Competitor('@zaki','helloloya',false,null),Competitor('@mohamed','takecre',false,null)];
+  File imageFile;
+  final picker=ImagePicker();
+  chooseim(ImageSource source)async {
+    final pickedFile = await picker.getImage(source: source);
+    setState(() {
+      imageFile = File(pickedFile.path);
+      setState(() {
+        im=imageFile;
+
+      });
+      (im==null)?print('isnill'):print('not null');
+    });
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     double bw=MediaQuery.of(context).size.width*.50;
@@ -26,7 +46,7 @@ class winnerstate extends State<winner>{
     double indent=MediaQuery.of(context).size.width*.0508;
     double mw1=MediaQuery.of(context).size.width*.0576;
     double mw2=MediaQuery.of(context).size.width*.0121;
-    double mw3=MediaQuery.of(context).size.width*.3802;
+    double mw3=MediaQuery.of(context).size.width*.27;
 
 
   return Scaffold(
@@ -88,7 +108,7 @@ class winnerstate extends State<winner>{
               color: white,
             ),
             child: ListView.builder(
-              itemCount: 12,
+              itemCount: y.length,
               itemBuilder: (BuildContext context,int index){
                 return Container(
                   child: Column(
@@ -98,26 +118,36 @@ class winnerstate extends State<winner>{
                          Container(
                            margin: EdgeInsets.only(left: mw1,right: mw2),
                            child:  GestureDetector(
-                             onTap: (){},
-                             child: Image.asset('assets/images/img.png',scale: 1.5,),
+                             onTap: ()async{
+                               chooseim(ImageSource.gallery);
+                               y[index].img=await chooseim(ImageSource.gallery);
+
+                               (im==null)?print('isnill'):print('not null');
+                             },
+                             child: Image.asset('assets/images/img.png',),
                            ),
                          ),
-                       GestureDetector(
+                        /*GestureDetector(
                                  onTap: (){
                                 setState(() {
-                                  l[index]=!l[index];
+                                  y[index].isWin=!y[index].isWin;
                                 });
                                  },
                                  child: CircleAvatar(
                                    radius: 7.5,
-                                   backgroundColor: ( l[index])?Colors.blue : Colors.red,
+                                   backgroundColor: ( y[index].isWin)?Colors.blue : Colors.red,
                                  )
-                             ),
-
-
-                         Expanded(child:  Container(
-                           margin: EdgeInsets.only(left: mw3),
-                           child: Text('@ahmed',
+                             ),*/
+                         IconButton(icon: Icon(Icons.circle,color:( y[index].isWin)?Colors.blue : Colors.red ,size: 15,),
+                             onPressed: (){setState(() {
+                           y[index].isWin=!y[index].isWin;
+                         });}),
+                          Align(
+                                 alignment: Alignment.centerRight,
+                          child:Container(
+                          margin: EdgeInsets.only(left: mw3),
+                           //color:black,
+                           child: Text(y[index].username,
                              style: TextStyle(
                                fontFamily: font,
                                fontSize: 27,
@@ -148,7 +178,11 @@ class winnerstate extends State<winner>{
                   borderRadius: new BorderRadius.circular(radius1),
                   side:BorderSide(color: white, width: 1),
                 ),
-                onPressed: (){},
+                onPressed: (){
+                  (imageFile==null)?print('isnill'):print('not null');
+                  Navigator.of(context)
+                      .pushReplacementNamed('/giftrule');
+                },
                 child:Text(str_start,style: TextStyle(
                   fontSize: 30,
                   fontFamily: font,

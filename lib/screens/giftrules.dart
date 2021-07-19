@@ -137,9 +137,17 @@ class giftstate extends State<gift> {
                             bottomLeft: Radius.circular(25),
                             bottomRight: Radius.circular(25),
                           ),
-                          child: Image.asset(
+                          child:(im!=null)?Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: FileImage(im)
+                              )
+                            ),
+                          )
+                         : Image.asset(
                             'assets/images/dog.jpg',
-                          )),
+                          )
+                      ),
                     ),
                     Align(
                       alignment: Alignment.bottomCenter,
