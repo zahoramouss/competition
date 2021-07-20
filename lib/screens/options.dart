@@ -10,7 +10,9 @@ class option extends StatefulWidget{
   }
   }
   class optionstate extends State<option>{
-
+    b(){
+      Navigator.of(context).pushNamedAndRemoveUntil('/options',(Route<dynamic>route)=>false);
+    }
   @override
   Widget build(BuildContext context) {
     double m1=MediaQuery.of(context).size.height*.0592;
@@ -32,7 +34,7 @@ class option extends StatefulWidget{
       child: Column(
        // mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          back(context,m1),
+          back(context,m1,b),
           title(context,str_options,m2),
           button(context,str_adduser,m3,1),
           button(context,str_adminchangepass,m4,2),

@@ -3,7 +3,7 @@ import 'dart:convert';
 import'package:http/http.dart' as http;
 
 import 'package:shared_preferences/shared_preferences.dart';
-
+import '../models/user.dart';
 
 class userController{
 
@@ -38,20 +38,21 @@ class userController{
 
   }
   ////add user
-  adduser(String name,String pass)async{
+  adduser(String name,String pass,String cpass)async{
     String myUrl='$url/register';
     http.Response res =await http.post(myUrl,
         headers: {
           'Authorization':'application/json'
         },
         body:{
-          "name":"lina2",
-          "password": "123456789",
-          "c_password" : "123456789"
+          "name":"$name",
+          "password": "$pass",
+          "c_password" : "$cpass"
         }
 
     );
     var data = json.decode(res.body);
+    state=data['success'];
     print(data);
   }
 /////delete user
@@ -69,21 +70,37 @@ class userController{
       var data=json.decode(res.body);
       print (token);
       print(data);
+    state=  data['success'];
+    print(state);
     }
     catch(e){}
 }
 ////show all users
-  showusers()async{
+ Future<List<User>> showusers()async{
+    List<User> l= List<User>();
    String myUrl='$url/showUsers';
-   http.Response res=await http.post(myUrl,
-   headers: {
-     'Accept':'application/json',
-     'Authorization':'Bearer $token'
+   String t=await read();
+    print(t);
+   //print('token is $t');
+   try{
+     http.Response res=await http.post(myUrl,
+         headers: {
+           'Accept':'application/json',
+           'Authorization':'Bearer $t'
+         }
+     );
+     var data=json.decode(res.body);
+     var u=data["data"];
+    u.forEach((user) {
+       l.add(User.fromJson(user));
+     });
+     print(l);
+     return l;
    }
-   );
-   var data=json.decode(res.body);
-   print (token);
-   print(data);
+   catch(e){
+     print(e.toString());
+   }
+
 }
 //// changeAdmin password
  chanceAdminpas(String pass,String reppass)async{
@@ -113,7 +130,7 @@ class userController{
     final pret = await SharedPreferences.getInstance();
     final key = 'tokenn';
     String value = pret.get(key)?? 'kkk';
-    print('read : $value') ;
+   // print('read : $value') ;
     return value;
   }
 

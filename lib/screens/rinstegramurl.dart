@@ -1,5 +1,4 @@
 import 'dart:ui';
-import '../widgets/widget.dart';
 import 'package:flutter/material.dart';
 import '../Resources/Strings.dart';
 import '../Resources/resourses.dart';

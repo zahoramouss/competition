@@ -2,6 +2,7 @@ import '../widgets/widget.dart';
 import 'package:flutter/material.dart';
 import '../Resources/Strings.dart';
 import '../Resources/resourses.dart';
+import '../controller/usercontroller.dart';
 class changepass extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
@@ -11,6 +12,22 @@ class changepass extends StatefulWidget{
 class changepasswordstate extends State<changepass>{
   TextEditingController t1=TextEditingController();
   TextEditingController t2=TextEditingController();
+  b(){
+    Navigator.of(context).pushNamedAndRemoveUntil('/options',(Route<dynamic>route)=>false);
+  }
+  userController us=userController();
+  changepass()async{
+    if(t1.text.trim().isNotEmpty&&t2.text.trim().isNotEmpty){
+      if(t1.text.trim()==t2.text.trim()){
+        us.chanceAdminpas(t1.text.trim(), t2.text.trim()).whenComplete((){
+
+
+        });
+      }
+
+    }else{}
+
+  }
   @override
   Widget build(BuildContext context) {
     double tw=MediaQuery.of(context).size.width*.73;
@@ -34,7 +51,7 @@ class changepasswordstate extends State<changepass>{
         child: Container(
           child: Column(
             children: [
-              back(context,m1),
+              back(context,m1,b),
               title(context,str_changepassword,m2),
               text(context,str_newpass,tw,m3),
               Textfield(context,t1),

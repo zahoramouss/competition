@@ -3,12 +3,34 @@ import '../widgets/widget.dart';
 import 'package:flutter/material.dart';
 import '../Resources/Strings.dart';
 import '../Resources/resourses.dart';
+import '../controller/usercontroller.dart';
+import '../models/user.dart';
+import 'dart:convert';
 class showusers extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
  return showstate();
   }}
   class showstate extends State<showusers>{
+    userController us=userController();
+    List<User>l= List<User>();
+    @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+    @override
+  void initState() {
+      super.initState();
+      us.showusers().then((value){
+        setState(() {
+          l=value;
+        });
+      });
+  }
+    b(){
+      Navigator.of(context).pushNamedAndRemoveUntil('/options',(Route<dynamic>route)=>false);
+    }
   @override
   Widget build(BuildContext context) {
     double w=MediaQuery.of(context).size.width*.81;
@@ -39,8 +61,10 @@ class showusers extends StatefulWidget{
            mainAxisAlignment: MainAxisAlignment.spaceBetween,
            children: [
              IconButton(icon: Image.asset('assets/images/add.png'),
-                 onPressed: (){}),
-           back(context,0)
+                 onPressed:()async{
+                   Navigator.of(context).pushNamedAndRemoveUntil('/addUser',(Route<dynamic>route)=>false);
+                 }),
+           back(context,0,b)
            ],
          ),
        ),
@@ -53,9 +77,10 @@ class showusers extends StatefulWidget{
               color: white,
               borderRadius: BorderRadius.circular(radius2),
             ),
-            child: ListView.builder(
+            child: (l.length==0)?Center(child:   Theme(data: Theme.of(context).copyWith(accentColor:purple),
+      child:CircularProgressIndicator() ,)):ListView.builder(
 
-              itemCount: 12,
+              itemCount:l.length,
               itemBuilder: (BuildContext context,int p){
                 return Container(
                  // alignment: Alignment.topCenter,
@@ -69,7 +94,7 @@ class showusers extends StatefulWidget{
 
                           children: [
                             Container(
-                              child: Text('@asma',style: TextStyle(
+                              child: Text('${l[p].username}',style: TextStyle(
                                 fontFamily: font,
                                 fontSize: 30,
                                 color: black,
@@ -78,7 +103,17 @@ class showusers extends StatefulWidget{
                             Container(
                               child: IconButton(
                                 icon:Image.asset('assets/images/delete.png'),
-                                onPressed: (){},
+                                onPressed: ()async{
+                                  await us.deleteuser(l[p].id);
+
+                                 setState(() {
+                                   l.removeAt(p-1);
+                                   print(l.length);
+
+                                 });
+                                 await us.deleteuser(l[p].id);
+
+                                },
                               ),
                             )
                           ],)),

@@ -20,12 +20,13 @@ runApp(MaterialApp(
     '/compet': (BuildContext context) => winner(),
     '/giftrule':(BuildContext context)=> gift(),
     '/login':(BuildContext context)=>login(),
-    '/adduser':(BuildContext context)=>adduser(),
-    '/options':(BuildContext conytext)=>option(),
+    '/addUser':(BuildContext context)=>adduser(),
+    '/options':(BuildContext context)=>option(),
      '/url':(BuildContext context)=>url(),
       '/win':(BuildContext context)=>winner(),
     '/changepass':(BuildContext context)=>changepass(),
     '/users':(BuildContext context)=>showusers(),
+    '/raviurl':(BuildContext context)=>integramurl(),
   }
 ));
 }

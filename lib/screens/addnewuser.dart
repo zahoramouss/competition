@@ -3,6 +3,7 @@ import '../widgets/widget.dart';
 import 'package:flutter/material.dart';
 import '../Resources/Strings.dart';
 import '../Resources/resourses.dart';
+import '../controller/usercontroller.dart';
 class adduser extends StatefulWidget{
 
   @override
@@ -13,6 +14,22 @@ class adduser extends StatefulWidget{
     TextEditingController t1=TextEditingController();
     TextEditingController t2=TextEditingController();
     TextEditingController t3=TextEditingController();
+    userController us=userController();
+    adduser()async{
+      if(t1.text.trim().isNotEmpty&&t2.text.trim().isNotEmpty&&t3.text.trim().isNotEmpty){
+       if(t2.text.trim().isNotEmpty==t3.text.trim().isNotEmpty){
+         us.adduser(t1.text.trim(), t2.text.trim(),t3.text.trim()).whenComplete((){
+           if(us.state){
+             print('sucess');
+           }
+         });
+         
+       }else{}
+      }
+      else{}
+    }
+    //backfuction
+
   @override
   Widget build(BuildContext context) {
     double tw=MediaQuery.of(context).size.width*.73;
@@ -46,7 +63,9 @@ class adduser extends StatefulWidget{
              alignment: Alignment.topRight,
              child: IconButton(
                icon: Image.asset('assets/images/back.png',scale: 1.5,),
-               onPressed: (){},
+               onPressed: (){
+                 Navigator.of(context).pushNamedAndRemoveUntil('/options',(Route<dynamic>route)=>false);
+               },
              ),
            ),
 
@@ -69,7 +88,9 @@ class adduser extends StatefulWidget{
                    borderRadius: new BorderRadius.circular(radius1),
                    side:BorderSide(color: white, width: 1),
                  ),
-                 onPressed: (){},
+                 onPressed: (){
+                   adduser();
+                 },
                  child:Text(str_save,
                    textAlign: TextAlign.center,
                    style: TextStyle(

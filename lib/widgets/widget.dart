@@ -48,14 +48,14 @@ Widget text(context,String t,double w,double m){
 
 
 }
-Widget back(context,double m){
+Widget back(context,double m,onPressed){
   return Container(
     margin: EdgeInsets.only(right: 20,top: m),
     //width: tw,
     alignment: Alignment.topRight,
     child: IconButton(
       icon: Image.asset('assets/images/back.png'),
-      onPressed: (){},
+      onPressed: onPressed,
     ),
   );
 }
@@ -72,12 +72,12 @@ Widget title(context,String t,double m){
   );
 }
 Widget button(context,String t,double m,int choice){
-  double tw=MediaQuery.of(context).size.width*.7412;
-  double th=MediaQuery.of(context).size.height*.0706;
+  double tw1=MediaQuery.of(context).size.width*.7412;
+  double th1=MediaQuery.of(context).size.height*.0706;
   return Container(
     margin: EdgeInsets.only(top: m),
-    width: tw,
-    height:th ,
+    width: tw1,
+    height:th1 ,
     child: RaisedButton(
       color: blue,
       shape: RoundedRectangleBorder(
@@ -87,7 +87,7 @@ Widget button(context,String t,double m,int choice){
       onPressed: (){
         switch(choice){
           case 1:
-            Navigator.of(context).pushNamedAndRemoveUntil('/adduser',(Route<dynamic>route)=>false);
+            Navigator.of(context).pushNamedAndRemoveUntil('/addUser',(Route<dynamic>route)=>false);
             break;
           case 2:
             Navigator.of(context).pushNamedAndRemoveUntil('/changepass',(Route<dynamic>route)=>false);

@@ -30,7 +30,9 @@ class winnerstate extends State<winner>{
     });
   }
 
-
+  b(){
+    Navigator.of(context).pushNamedAndRemoveUntil('/url',(Route<dynamic>route)=>false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +96,7 @@ class winnerstate extends State<winner>{
                     ],
                   ),
                 ),
-                back(context,0),
+                back(context,0,b),
               ],
             )
           ),
@@ -181,7 +183,7 @@ class winnerstate extends State<winner>{
                 onPressed: (){
                   (imageFile==null)?print('isnill'):print('not null');
                   Navigator.of(context)
-                      .pushReplacementNamed('/giftrule');
+                      .pushReplacementNamed('/raviurl');
                 },
                 child:Text(str_start,style: TextStyle(
                   fontSize: 30,

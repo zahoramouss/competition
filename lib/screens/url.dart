@@ -11,6 +11,9 @@ class  url extends StatefulWidget{
 }
 class urlstate extends State<url>{
   TextEditingController t=TextEditingController();
+  b(){
+    Navigator.of(context).pushNamedAndRemoveUntil('/options',(Route<dynamic>route)=>false);
+  }
   @override
   Widget build(BuildContext context) {
     double tw=MediaQuery.of(context).size.width*.7412;
@@ -43,7 +46,7 @@ class urlstate extends State<url>{
                 Navigator.of(context).pushNamedAndRemoveUntil('/options',(Route<dynamic>route)=>false);
               }),
              title(context,str_title,m2),
-              back(context,0),
+              back(context,0,b),
 
             ],
           ),
@@ -105,7 +108,7 @@ class urlstate extends State<url>{
             side:BorderSide(color: white, width: 1),
           ),
           onPressed: (){
-            Navigator.of(context).pushNamedAndRemoveUntil('/winner',(Route<dynamic>route)=>false);
+            Navigator.of(context).pushNamedAndRemoveUntil('/win',(Route<dynamic>route)=>false);
           },
           child:Text(str_keep,
             textAlign: TextAlign.right,
