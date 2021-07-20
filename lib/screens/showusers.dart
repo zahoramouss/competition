@@ -107,7 +107,7 @@ class showusers extends StatefulWidget{
                                   await us.deleteuser(l[p].id);
 
                                  setState(() {
-                                   l.removeAt(p-1);
+                                   l.removeAt(p);
                                    print(l.length);
 
                                  });

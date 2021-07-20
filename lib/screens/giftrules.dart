@@ -277,7 +277,7 @@ class giftstate extends State<gift> {
                   height: tf1h,
                   width: tf1w,
                   child: TextField(
-                    //controller: t,
+                  controller: t,
                     textAlign: TextAlign.end,
                     decoration: InputDecoration(
                       filled: true,
@@ -317,23 +317,168 @@ class giftstate extends State<gift> {
                         decoration: BoxDecoration(
                             color: gray3,
                             borderRadius: BorderRadius.circular(radius4)),
-                        child: Builder(
-                          builder: (context) => GestureDetector(
+                        child:  GestureDetector(
                             onTap: () {
-                              Scaffold.of(context).showSnackBar(
-                                SnackBar(
-                                    content: Container(
-                                        height: 150,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        decoration: BoxDecoration(
-                                            color: yellow,
-                                            borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(32),
-                                                topRight: Radius.circular(32)))
-                                        // width: ,
-                                        )),
-                              );
+                              showModalBottomSheet(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(25),
+                                        topLeft: Radius.circular(25),
+
+                                      )),
+                                  context: context,
+                                  builder: ( context) {
+
+
+                                    return StatefulBuilder(
+                                        builder: (BuildContext context, StateSetter setState) {
+                                          double bth=MediaQuery.of(context).size.height*.0665;
+                                          double btw=MediaQuery.of(context).size.width*.4358;
+                                          return Container(
+                                            height:MediaQuery.of(context).size.height*.4524 ,
+                                            width:MediaQuery.of(context).size.width ,
+
+
+
+                                            // color:Colors.transparent,
+                                            child:
+                                            Container(
+                                              /*  decoration: BoxDecoration(
+                                          color:white,
+                                          borderRadius: BorderRadius.only(
+                                            topRight: Radius.circular(25),
+                                            topLeft: Radius.circular(25),
+
+                                          )
+                                      ),*/
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                children: [
+                                                  ////bar
+                                                  Container(
+                                                    margin:EdgeInsets.only(top:ma1),
+                                                    height:MediaQuery.of(context).size.height*.0067,
+                                                    width: MediaQuery.of(context).size.width*.0966,
+                                                    decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius.circular(14),
+                                                        color: Color(0xffcdced2)
+                                                    ),
+                                                  ),
+                                                  //txt of winnern numbers
+                                                  Container(
+                                                    margin: EdgeInsets.only(top: ma2),
+                                                    child: Text(str_putwnb,style: TextStyle(
+                                                        fontSize: 30,
+                                                        fontFamily: font,
+                                                        color: black
+                                                    ),),
+                                                  ),
+                                                  //number choices
+                                                  Container(
+                                                    margin: EdgeInsets.only(top:ma3),
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                      children: [
+                                                        nbcount(context,'+25'),
+                                                        nbcount(context,'+20'),
+                                                        nbcount(context,'+15'),
+                                                        nbcount(context,'+10'),
+                                                        nbcount(context,'+5'),
+                                                      ],),
+                                                  ),
+                                                  //add
+                                                  Container(
+                                                    //color: purple ,
+                                                      margin: EdgeInsets.only(top: ma4),
+                                                      child: Stack(
+                                                        alignment: Alignment.center,
+                                                        children: [
+                                                          Container(
+
+                                                            color: gray3 ,
+                                                            width: MediaQuery.of(context).size.width*.46,
+                                                            height: MediaQuery.of(context).size.height*.07,
+                                                            child: Text('$nbwin',
+                                                              textAlign: TextAlign.center,
+                                                              style: TextStyle(
+                                                                  fontSize: 35,
+                                                                  fontFamily: font1,
+                                                                  color: black
+                                                              ),),
+                                                          ),
+                                                          Row(
+                                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                            children: [
+                                                              addw(context,pressadd,true),
+
+                                                              addw(context,pressmin,false)
+                                                            ],),
+                                                        ],
+                                                      )
+                                                  ),
+                                                  //buttons
+                                                  Container(
+                                                    margin: EdgeInsets.only(top: ma5),
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                      children: [
+                                                        //حسنا
+                                                        Container(
+                                                          height: bth,
+                                                          width: btw,
+                                                          child: RaisedButton(
+                                                            onPressed: (){
+                                                              Navigator.pop(context);
+                                                            },
+                                                            color: purple6,
+                                                            elevation: 0,
+                                                            shape: OutlineInputBorder(
+                                                                borderRadius: BorderRadius.circular(radius5),
+                                                                borderSide: BorderSide(width: 0,color: purple6)
+                                                            ),
+                                                            child: Text('حسنا',style:TextStyle(
+                                                                fontFamily: font,
+                                                                color: white,
+                                                                fontSize: 24
+                                                            )),
+
+                                                          ),
+                                                        ),
+                                                        //إلغاء
+                                                        Container(
+                                                          height: bth,
+                                                          width: btw,
+                                                          child: RaisedButton(
+                                                            onPressed: (){
+                                                              Navigator.pop(context);
+                                                              setState((){
+                                                                nbwin=0;
+                                                              });
+                                                            },
+                                                            color: gray3,
+                                                            shape: OutlineInputBorder(
+                                                                borderRadius: BorderRadius.circular(radius5),
+                                                                borderSide: BorderSide(width: 0,color: gray3)
+                                                            ),
+                                                            child: Text('إلغاء',style:TextStyle(
+                                                                fontFamily: font,
+                                                                color: black,
+                                                                fontSize: 24
+                                                            )),
+
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+
+
+                                          );
+                                        });});
+
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -349,7 +494,7 @@ class giftstate extends State<gift> {
                               ],
                             ),
                           ),
-                        )),
+                        ),
 
                     ///
                     Container(
