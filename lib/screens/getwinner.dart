@@ -6,7 +6,15 @@ import '../Resources/Strings.dart';
 import '../Resources/resourses.dart';
 import '../models/champion.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:html/parser.dart';
+import '../models/elem_commnt.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 class winner extends StatefulWidget{
+  final url;
+
+  const winner({Key key, this.url}) : super(key: key);
   @override
   State<StatefulWidget> createState() {
    return winnerstate();
@@ -14,7 +22,11 @@ class winner extends StatefulWidget{
   }
 }
 class winnerstate extends State<winner>{
-  List l=[false, false,false, false,false, false,false, false,false, false,false, false];
+  InAppWebViewController webView;
+  String myurl;
+
+  ScrollController listController;
+
   List<Competitor> y=[Competitor('@hamied','hi',false,null),Competitor('@zaho','goodluck',false,null),Competitor('@aymen','hi',false,null),Competitor('@mohamed','takecre',false,null),Competitor('@zaki','helloloya',false,null),Competitor('@mohamed','takecre',false,null)];
   File imageFile;
   final picker=ImagePicker();
@@ -35,6 +47,66 @@ class winnerstate extends State<winner>{
   }
 
   @override
+  void initState() {
+    myurl = widget.url;
+    if(myurl!=null || myurl=='')
+      myurl = "https://www.instagram.com/p/CRFDbnTDRoX/";
+
+    listController = ScrollController();
+    listController = ScrollController(initialScrollOffset: 50.0);
+    super.initState();
+  }
+
+  List<ElemComment> listUserComment = <ElemComment>[];
+  int _currentItem;
+  getData(controller) async{
+    var html;
+    controller.evaluateJavascript( source: "window.document.getElementsByTagName('html')[0].outerHTML;").then((e){
+      html = e;
+      var document = parse(html);
+      var commnts = document.getElementsByClassName('C4VMK');
+      dynamic header = document.getElementsByTagName('header');
+
+      dynamic postOwner = "@${header[0].nodes[1].nodes[0].innerHtml.split('href=\"/')[1].split('/\"')[0]}";
+      String user;
+      String cmnt;
+      listUserComment = <ElemComment>[];
+
+      for(int k=0; k<commnts.length; k++)
+      {
+        user = '';
+        cmnt = '';
+
+        for(int i=0; i<commnts[k].nodes.length; i++)
+        {
+          dynamic elem = commnts[k].nodes[i];
+          if(cmnt=='' && elem.localName=="span")
+          {
+            cmnt = elem.text;
+          }
+          else if(user=='' && elem.innerHtml.contains('href'))
+          {
+            user = elem.innerHtml.split('href=\"/')[1].split('/\"')[0];
+          }
+        }
+        listUserComment.add(ElemComment(user:"@$user", comment:cmnt, index:k));
+      }
+
+      listUserComment.removeWhere((element) => element.user == postOwner);
+      print(listUserComment.toString());
+
+      final existing = Set<ElemComment>();
+      List<ElemComment> listUserComment2 = listUserComment
+          .where((element) => existing.add(element)).toList();
+      print(listUserComment2.toString());
+      listUserComment = listUserComment2;
+      setState(() {
+
+      });
+    });
+    //log(html);
+  }
+  @override
   Widget build(BuildContext context) {
     double bw=MediaQuery.of(context).size.width*.50;
     double bh=MediaQuery.of(context).size.height*.0625;
@@ -52,7 +124,55 @@ class winnerstate extends State<winner>{
 
 
   return Scaffold(
-    body: Container(
+    body:
+    Stack(
+        children: [
+    Container(
+    child: Column(children: <Widget>[
+    Expanded(
+    child: InAppWebView(
+    initialUrlRequest: URLRequest(url:Uri.parse(myurl)),
+
+    //initialHeaders: {},
+    initialOptions: InAppWebViewGroupOptions(
+    crossPlatform: InAppWebViewOptions(
+    //  debuggingEnabled: true,
+    userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:61.0) Gecko/20100101 Firefox/61.0"
+    ),
+    ),
+    onWebViewCreated: (InAppWebViewController controller) {
+       webView = controller;
+    },
+      onLoadStart: (InAppWebViewController controller, url) {
+
+                 },
+       onLoadStop: (InAppWebViewController controller, Uri url) async {
+//////
+
+
+
+
+
+
+
+
+
+
+
+
+
+    await getData(controller);
+
+    },
+    onReceivedServerTrustAuthRequest: (InAppWebViewController controller, challenge) async {
+    return ServerTrustAuthResponse(action: ServerTrustAuthResponseAction.PROCEED);
+    },
+    )
+    )
+    ]),
+    ),
+
+    Container(
       decoration: BoxDecoration(
         gradient:LinearGradient(
           colors: [Color(0xffCA2FE0),Color(0xfffb8c33)],
@@ -110,7 +230,7 @@ class winnerstate extends State<winner>{
               color: white,
             ),
             child: ListView.builder(
-              itemCount: y.length,
+              itemCount: listUserComment.length,
               itemBuilder: (BuildContext context,int index){
                 return Container(
                   child: Column(
@@ -122,7 +242,7 @@ class winnerstate extends State<winner>{
                            child:  GestureDetector(
                              onTap: ()async{
                                chooseim(ImageSource.gallery);
-                               y[index].img=await chooseim(ImageSource.gallery);
+                               listUserComment[index].img=await chooseim(ImageSource.gallery);
 
                                (im==null)?print('isnill'):print('not null');
                              },
@@ -142,14 +262,14 @@ class winnerstate extends State<winner>{
                              ),*/
                          IconButton(icon: Icon(Icons.circle,color:( y[index].isWin)?Colors.blue : Colors.red ,size: 15,),
                              onPressed: (){setState(() {
-                           y[index].isWin=!y[index].isWin;
+                               listUserComment[index].isWiner=!listUserComment[index].isWiner;
                          });}),
                           Align(
                                  alignment: Alignment.centerRight,
                           child:Container(
                           margin: EdgeInsets.only(left: mw3),
                            //color:black,
-                           child: Text(y[index].username,
+                           child: Text(listUserComment[index].user,
                              style: TextStyle(
                                fontFamily: font,
                                fontSize: 27,
@@ -203,8 +323,8 @@ class winnerstate extends State<winner>{
           ),
         ],
       ),
-    ),
-  );
+    ),]
+  ));
 
 
 

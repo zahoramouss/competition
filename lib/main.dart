@@ -9,13 +9,13 @@ import 'screens/getwinner.dart';
 import 'screens/rinstegramurl.dart';
 import 'screens/giftrules.dart';
 import 'controller/usercontroller.dart';
-
+import'screens/gif.dart';
 void main()async {
   //userController ty=userController();
  //await ty.deleteuser(5);
 runApp(MaterialApp(
 
-  home: login(),
+  home: gif(),
   routes: {
     '/compet': (BuildContext context) => winner(),
     '/giftrule':(BuildContext context)=> gift(),
