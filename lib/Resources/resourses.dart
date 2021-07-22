@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import'../models/elem_commnt.dart';
 import 'package:flutter/material.dart';
 //colors code
 const Color  yellow=Color(0xfff4a622);
@@ -25,5 +25,6 @@ double radius2=17;
 double radius3=14;
 double radius4=11;
 double radius5=13;
-////
+///////////////////////
 File im;
+List<ElemComment> l=List<ElemComment>();

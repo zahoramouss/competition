@@ -15,15 +15,15 @@ void main()async {
  //await ty.deleteuser(5);
 runApp(MaterialApp(
 
-  home: gif(),
+  home: login(),
   routes: {
-    '/compet': (BuildContext context) => winner(),
+
     '/giftrule':(BuildContext context)=> gift(),
     '/login':(BuildContext context)=>login(),
     '/addUser':(BuildContext context)=>adduser(),
     '/options':(BuildContext context)=>option(),
      '/url':(BuildContext context)=>url(),
-      '/win':(BuildContext context)=>winner(),
+    '/gif':(BuildContext context)=>gif(),
     '/changepass':(BuildContext context)=>changepass(),
     '/users':(BuildContext context)=>showusers(),
     '/raviurl':(BuildContext context)=>integramurl(),

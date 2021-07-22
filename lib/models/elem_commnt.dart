@@ -18,6 +18,8 @@ class ElemComment{
      user : map["user"],
      comment : map["comment"],
      index   : map["index"],
+    isWiner: map["isWiner"],
+    img: map["img"],
 
 
   );

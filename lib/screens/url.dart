@@ -3,6 +3,7 @@ import '../widgets/widget.dart';
 import 'package:flutter/material.dart';
 import '../Resources/Strings.dart';
 import '../Resources/resourses.dart';
+import '../screens/getwinner.dart';
 class  url extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
@@ -108,7 +109,8 @@ class urlstate extends State<url>{
             side:BorderSide(color: white, width: 1),
           ),
           onPressed: (){
-            Navigator.of(context).pushNamedAndRemoveUntil('/win',(Route<dynamic>route)=>false);
+            final f=t.text.trim();
+            Navigator.push(context,new MaterialPageRoute(builder: (BuildContext context)=>new winner(url: f,)));
           },
           child:Text(str_keep,
             textAlign: TextAlign.right,

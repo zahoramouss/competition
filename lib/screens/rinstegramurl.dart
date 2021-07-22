@@ -161,7 +161,7 @@ class integramurl extends StatefulWidget{
                            anim=false;
                          });
                        Navigator.of(context)
-                              .pushReplacementNamed('/home');
+                              .pushReplacementNamed('/giftrule');
                    });
                    });
                  },

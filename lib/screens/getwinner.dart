@@ -14,7 +14,7 @@ import 'package:visibility_detector/visibility_detector.dart';
 class winner extends StatefulWidget{
   final url;
 
-  const winner({Key key, this.url}) : super(key: key);
+  const winner( {Key key, this.url}) : super(key: key);
   @override
   State<StatefulWidget> createState() {
    return winnerstate();
@@ -49,12 +49,14 @@ class winnerstate extends State<winner>{
   @override
   void initState() {
     myurl = widget.url;
-    if(myurl!=null || myurl=='')
-      myurl = "https://www.instagram.com/p/CRFDbnTDRoX/";
+    print('myurl                        $myurl');
+   // if(myurl!=null || myurl=='')
+      //myurl = "https://www.instagram.com/p/CRFDbnTDRoX/";
 
     listController = ScrollController();
     listController = ScrollController(initialScrollOffset: 50.0);
     super.initState();
+    //print ()
   }
 
   List<ElemComment> listUserComment = <ElemComment>[];
@@ -120,7 +122,7 @@ class winnerstate extends State<winner>{
     double indent=MediaQuery.of(context).size.width*.0508;
     double mw1=MediaQuery.of(context).size.width*.0576;
     double mw2=MediaQuery.of(context).size.width*.0121;
-    double mw3=MediaQuery.of(context).size.width*.27;
+    double mw3=MediaQuery.of(context).size.width*.05;
 
 
   return Scaffold(
@@ -181,6 +183,7 @@ class winnerstate extends State<winner>{
         ),
       ),
 
+      child:Expanded(
       child:Column(
         children: [
           Container(
@@ -200,12 +203,11 @@ class winnerstate extends State<winner>{
                    border:Border.all(color: white,
                    width: 1),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-
-                     Image.asset('assets/images/coin.png') ,
-                      Text(str_choice,textAlign: TextAlign.center,
+                  child: RaisedButton(
+                    onPressed: (){
+                      im=chooseim(ImageSource.gallery);
+                    },
+                      child:Text(str_choice,textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 21,
                         fontFamily: font,
@@ -213,7 +215,7 @@ class winnerstate extends State<winner>{
                       ),),
 
 
-                    ],
+
                   ),
                 ),
                 back(context,0,b),
@@ -229,7 +231,8 @@ class winnerstate extends State<winner>{
               borderRadius: BorderRadius.circular(radius2),
               color: white,
             ),
-            child: ListView.builder(
+            child: (listUserComment.length==0)?(Center(child:CircularProgressIndicator())):
+            ListView.builder(
               itemCount: listUserComment.length,
               itemBuilder: (BuildContext context,int index){
                 return Container(
@@ -242,9 +245,9 @@ class winnerstate extends State<winner>{
                            child:  GestureDetector(
                              onTap: ()async{
                                chooseim(ImageSource.gallery);
-                               listUserComment[index].img=await chooseim(ImageSource.gallery);
+                               listUserComment[index].img= chooseim(ImageSource.gallery);
 
-                               (im==null)?print('isnill'):print('not null');
+
                              },
                              child: Image.asset('assets/images/img.png',),
                            ),
@@ -260,8 +263,11 @@ class winnerstate extends State<winner>{
                                    backgroundColor: ( y[index].isWin)?Colors.blue : Colors.red,
                                  )
                              ),*/
-                         IconButton(icon: Icon(Icons.circle,color:( y[index].isWin)?Colors.blue : Colors.red ,size: 15,),
-                             onPressed: (){setState(() {
+                         IconButton(icon: Icon(Icons.circle,color:( (listUserComment[index].isWiner)==true)?Colors.blue : Colors.red ,size: 15,),
+                             onPressed: (){
+
+                           setState(() {
+                             (listUserComment[index].isWiner==null)?(listUserComment[index].isWiner=true):
                                listUserComment[index].isWiner=!listUserComment[index].isWiner;
                          });}),
                           Align(
@@ -272,7 +278,7 @@ class winnerstate extends State<winner>{
                            child: Text(listUserComment[index].user,
                              style: TextStyle(
                                fontFamily: font,
-                               fontSize: 27,
+                               fontSize: 23,
                                color: black,
                              ),),
                          ))
@@ -301,6 +307,7 @@ class winnerstate extends State<winner>{
                   side:BorderSide(color: white, width: 1),
                 ),
                 onPressed: (){
+                  l=listUserComment;
                   (imageFile==null)?print('isnill'):print('not null');
                   Navigator.of(context)
                       .pushReplacementNamed('/raviurl');
@@ -323,7 +330,7 @@ class winnerstate extends State<winner>{
           ),
         ],
       ),
-    ),]
+      )),]
   ));
 
 

@@ -73,7 +73,9 @@ class userController{
     state=  data['success'];
     print(state);
     }
-    catch(e){}
+    catch(e){
+
+    }
 }
 ////show all users
  Future<List<User>> showusers()async{

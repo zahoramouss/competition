@@ -18,9 +18,9 @@ class loginstate extends State<login>{
   log()async{
   if(username.text.trim().isNotEmpty&&password.text.trim().isNotEmpty){
     us.Loginuser(username.text.trim(),password.text.trim()).whenComplete((){
-     if(us.state){
+
        Navigator.of(context).pushNamedAndRemoveUntil('/url',(Route<dynamic>route)=>false);
-     }
+
     });
   }
   else{}

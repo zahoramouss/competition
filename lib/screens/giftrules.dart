@@ -13,9 +13,11 @@ class gift extends StatefulWidget {
 }
 
 class giftstate extends State<gift> {
+  PersistentBottomSheetController cont;
+  final skey=GlobalKey<ScaffoldState>();
   int groupv = 0;
   bool isSwitched = false;
-  int nbwinner = 1;
+  int nbwinner =0;
   String str_win = 'الفائزون';
   String str_wi = 'الفائزون البدلاء';
   TextEditingController t = TextEditingController();
@@ -28,19 +30,28 @@ class giftstate extends State<gift> {
     });
   }
    pressadd(){
-    setState(() {
-      nbwin=nbwin+1;
+  setState(() {
+      nbwinner=nbwinner+1;
 
     });
-    print(nbwin);
+
+  setState(() {
+      nbwinner=nbwinner+1;
+
+    });
+    print(nbwinner);
    }
    pressmin(){
     setState(() {
-      nbwin=nbwin-1;
+      nbwinner=nbwinner-1;
     });
+    print(nbwinner);
    }
   @override
   Widget build(BuildContext context) {
+    double h=MediaQuery.of(context).size.height*.07;
+    double w1=MediaQuery.of(context).size.width*.14;
+    double r=MediaQuery.of(context).size.height*.01;
     double cradius = MediaQuery.of(context).size.width * .0263;
     double cw = MediaQuery.of(context).size.width * .0944;
     double ch = MediaQuery.of(context).size.height * .0366;
@@ -140,12 +151,13 @@ class giftstate extends State<gift> {
                           child:(im!=null)?Container(
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: FileImage(im)
+                               fit: BoxFit.fill,
+                                image: FileImage(im,)
                               )
                             ),
                           )
                          : Image.asset(
-                            'assets/images/dog.jpg',
+                            'assets/images/dog.jpg',fit:BoxFit.fill
                           )
                       ),
                     ),
@@ -278,9 +290,12 @@ class giftstate extends State<gift> {
                   width: tf1w,
                   child: TextField(
                   controller: t,
+                    style:TextStyle(
+                        fontFamily: font, fontSize: 19, color: black),
                     textAlign: TextAlign.end,
                     decoration: InputDecoration(
                       filled: true,
+
                       hintText: str_tgift,
                       hintStyle: TextStyle(
                           fontFamily: font, fontSize: 19, color: gray2),
@@ -319,167 +334,177 @@ class giftstate extends State<gift> {
                             borderRadius: BorderRadius.circular(radius4)),
                         child:  GestureDetector(
                             onTap: () {
+
                               showModalBottomSheet(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(25),
-                                        topLeft: Radius.circular(25),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(25),
+                                      topLeft: Radius.circular(25),)),
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return BottomSheet(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.only(
+                                          topRight: Radius.circular(25),
+                                          topLeft: Radius.circular(25),)) ,
+                                    onClosing: () {},
+                                    builder: (BuildContext context) {
+                                      bool b = false;
 
-                                      )),
-                                  context: context,
-                                  builder: ( context) {
+                                      return StatefulBuilder(
 
+                                          builder: (BuildContext context, setState){
+                                            double bth=MediaQuery.of(context).size.height*.0665;
+                                            double btw=MediaQuery.of(context).size.width*.4358;
+                                            return Container(
 
-                                    return StatefulBuilder(
-                                        builder: (BuildContext context, StateSetter setState) {
-                                          double bth=MediaQuery.of(context).size.height*.0665;
-                                          double btw=MediaQuery.of(context).size.width*.4358;
-                                          return Container(
-                                            height:MediaQuery.of(context).size.height*.4524 ,
-                                            width:MediaQuery.of(context).size.width ,
-
-
-
-                                            // color:Colors.transparent,
-                                            child:
-                                            Container(
-                                              /*  decoration: BoxDecoration(
-                                          color:white,
-                                          borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(25),
-                                            topLeft: Radius.circular(25),
-
-                                          )
-                                      ),*/
-                                              child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.center,
-                                                children: [
-                                                  ////bar
-                                                  Container(
-                                                    margin:EdgeInsets.only(top:ma1),
-                                                    height:MediaQuery.of(context).size.height*.0067,
-                                                    width: MediaQuery.of(context).size.width*.0966,
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.only(
+                                                    topRight: Radius.circular(25),
+                                                    topLeft:Radius.circular(25),
+                                                  ),
+                                                  color: Colors.red,
+                                                ),
+                                                //color: Colors.transparent,
+                                                child:Container(
                                                     decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.circular(14),
-                                                        color: Color(0xffcdced2)
+                                                      borderRadius: BorderRadius.only(
+                                                        topRight: Radius.circular(25),
+                                                        topLeft:Radius.circular(25),
+                                                      ),
+                                                      color: Colors.white,
                                                     ),
-                                                  ),
-                                                  //txt of winnern numbers
-                                                  Container(
-                                                    margin: EdgeInsets.only(top: ma2),
-                                                    child: Text(str_putwnb,style: TextStyle(
-                                                        fontSize: 30,
-                                                        fontFamily: font,
-                                                        color: black
-                                                    ),),
-                                                  ),
-                                                  //number choices
-                                                  Container(
-                                                    margin: EdgeInsets.only(top:ma3),
-                                                    child: Row(
-                                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                      children: [
-                                                        nbcount(context,'+25'),
-                                                        nbcount(context,'+20'),
-                                                        nbcount(context,'+15'),
-                                                        nbcount(context,'+10'),
-                                                        nbcount(context,'+5'),
-                                                      ],),
-                                                  ),
-                                                  //add
-                                                  Container(
-                                                    //color: purple ,
-                                                      margin: EdgeInsets.only(top: ma4),
-                                                      child: Stack(
-                                                        alignment: Alignment.center,
-                                                        children: [
-                                                          Container(
 
-                                                            color: gray3 ,
-                                                            width: MediaQuery.of(context).size.width*.46,
-                                                            height: MediaQuery.of(context).size.height*.07,
-                                                            child: Text('$nbwin',
-                                                              textAlign: TextAlign.center,
-                                                              style: TextStyle(
-                                                                  fontSize: 35,
-                                                                  fontFamily: font1,
-                                                                  color: black
-                                                              ),),
-                                                          ),
-                                                          Row(
-                                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                    child :Column(
+                                                        children:[
+                                                          Column(
+
                                                             children: [
-                                                              addw(context,pressadd,true),
+                                                              //الخط
+                                                              Container(
+                                                                margin:EdgeInsets.only(top:ma1),
+                                                                height:MediaQuery.of(context).size.height*.0067,
+                                                                width: MediaQuery.of(context).size.width*.0966,
+                                                                decoration: BoxDecoration(
+                                                                    borderRadius: BorderRadius.circular(14),
+                                                                    color: Color(0xffcdced2)
+                                                                ),
+                                                              ),
+                                                              //فائمة الفائزين
+                                                              Container(
+                                                                margin: EdgeInsets.only(top: ma2),
+                                                                child: Text('قائمة الفائزين',),
+                                                              ),
+                                                              //الاختيارات
+                                                              Container(
+                                                                margin: EdgeInsets.only(top:ma3),
+                                                                child: Row(
+                                                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                                  children: [
+                                                                    nbcount(context,'+25'),
+                                                                    nbcount(context,'+20'),
+                                                                    nbcount(context,'+15'),
+                                                                    nbcount(context,'+10'),
+                                                                    nbcount(context,'+5'),
+                                                                  ],),
+                                                              ),
+                                                              Container(
+                                                                //color: purple ,
+                                                                  margin: EdgeInsets.only(top: ma4),
+                                                                  child: Column(
+                                                                    //alignment: Alignment.center,
+                                                                    children: [
 
-                                                              addw(context,pressmin,false)
-                                                            ],),
-                                                        ],
-                                                      )
-                                                  ),
-                                                  //buttons
-                                                  Container(
-                                                    margin: EdgeInsets.only(top: ma5),
-                                                    child: Row(
-                                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                      children: [
-                                                        //حسنا
-                                                        Container(
-                                                          height: bth,
-                                                          width: btw,
-                                                          child: RaisedButton(
-                                                            onPressed: (){
-                                                              Navigator.pop(context);
-                                                            },
-                                                            color: purple6,
-                                                            elevation: 0,
-                                                            shape: OutlineInputBorder(
-                                                                borderRadius: BorderRadius.circular(radius5),
-                                                                borderSide: BorderSide(width: 0,color: purple6)
-                                                            ),
-                                                            child: Text('حسنا',style:TextStyle(
-                                                                fontFamily: font,
-                                                                color: white,
-                                                                fontSize: 24
-                                                            )),
+                                                                      Row(
+                                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                                        children: [
+                                                                          Container(
+                                                                            height: h,
+                                                                            width: w1,
+                                                                            decoration: BoxDecoration(
+                                                                              borderRadius: BorderRadius.circular(20),
+                                                                              color: Color(0xff072045),
+                                                                            ),
+                                                                            child:Stack(
+                                                                                alignment: Alignment.center,
+                                                                                children:[
+                                                                                  CircleAvatar(
+                                                                                    radius:10,
+                                                                                    backgroundColor: white,),
+                                                                                  IconButton(
+                                                                                    onPressed: (){
+                                                                                      setState((){
+                                                                                        nbwinner+=1;
+                                                                                      });
+                                                                                    },
+                                                                                    icon:Icon( Icons.add,color: Color(0xff707070),size: 15,),),
 
+                                                                                ]),
+
+                                                                          ),
+                                                                          Container(
+
+                                                                            color: gray3 ,
+                                                                            width: MediaQuery.of(context).size.width*.46,
+                                                                            height: MediaQuery.of(context).size.height*.07,
+                                                                            child: Text('$nbwinner mm',
+                                                                              textAlign: TextAlign.center,
+                                                                              style: TextStyle(
+                                                                                  fontSize: 35,
+                                                                                  // fontFamily: font1,
+                                                                                  color: black
+                                                                              ),),
+                                                                          ),
+                                                                          Container(
+                                                                            height: h,
+                                                                            width: w1,
+                                                                            decoration: BoxDecoration(
+                                                                              borderRadius: BorderRadius.circular(20),
+                                                                              color: Color(0xff072045),
+                                                                            ),
+                                                                            child:Stack(
+                                                                                alignment: Alignment.center,
+                                                                                children:[
+                                                                                  CircleAvatar(
+                                                                                    radius:10,
+                                                                                    backgroundColor: white,),
+                                                                                  IconButton(
+                                                                                    onPressed: (){
+                                                                                      setState((){
+                                                                                        nbwinner-=1;
+                                                                                      });
+                                                                                    },
+                                                                                    icon:Icon( Icons.remove,color: Color(0xff707070),size: 15,),),
+
+                                                                                ]),
+
+                                                                          ),
+                                                                        ],),
+                                                                    ],
+                                                                  )
+                                                              ),
+                                                              Text('$nbwin'),
+                                                              RaisedButton(
+                                                                onPressed: (){
+                                                                  setState((){
+                                                                   nbwin=nbwin+1;
+                                                                  });
+                                                                },
+                                                              ),
+
+                                                            ],
                                                           ),
-                                                        ),
-                                                        //إلغاء
-                                                        Container(
-                                                          height: bth,
-                                                          width: btw,
-                                                          child: RaisedButton(
-                                                            onPressed: (){
-                                                              Navigator.pop(context);
-                                                              setState((){
-                                                                nbwin=0;
-                                                              });
-                                                            },
-                                                            color: gray3,
-                                                            shape: OutlineInputBorder(
-                                                                borderRadius: BorderRadius.circular(radius5),
-                                                                borderSide: BorderSide(width: 0,color: gray3)
-                                                            ),
-                                                            child: Text('إلغاء',style:TextStyle(
-                                                                fontFamily: font,
-                                                                color: black,
-                                                                fontSize: 24
-                                                            )),
-
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
 
 
-                                          );
-                                        });});
+                                                         ])));}
+                                      );
+                                    },
+                                  );
+                                },
+                              );
+                             },
 
-                            },
+
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
@@ -496,7 +521,7 @@ class giftstate extends State<gift> {
                           ),
                         ),
 
-                    ///
+                    /////xiner
                     Container(
                       height: slh,
                       width: slw,
@@ -505,175 +530,241 @@ class giftstate extends State<gift> {
                           borderRadius: BorderRadius.circular(radius4)),
                       child: GestureDetector(
                         onTap: () {
-                          showModalBottomSheet(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(25),
-                                    topLeft: Radius.circular(25),
+                           setState(() {
+                             showModalBottomSheet(
+                               shape: RoundedRectangleBorder(
+                                   borderRadius: BorderRadius.only(
+                                     topRight: Radius.circular(25),
+                                     topLeft: Radius.circular(25),)),
+                               context: context,
+                               builder: (BuildContext context) {
+                                 return BottomSheet(
+                                   shape: RoundedRectangleBorder(
+                                       borderRadius: BorderRadius.only(
+                                         topRight: Radius.circular(25),
+                                         topLeft: Radius.circular(25),)) ,
+                                   onClosing: () {},
+                                   builder: (BuildContext context) {
+                                     bool b = false;
 
-                                  )),
-                              context: context,
-                              builder: ( context) {
+                                     return StatefulBuilder(
+
+                                         builder: (BuildContext context, setState){
+                                           double bth=MediaQuery.of(context).size.height*.0665;
+                                           double btw=MediaQuery.of(context).size.width*.4358;
+                                           return Container(
+                                               height:MediaQuery.of(context).size.height*.4524 ,
+                                               decoration: BoxDecoration(
+                                                 borderRadius: BorderRadius.only(
+                                                   topRight: Radius.circular(25),
+                                                   topLeft:Radius.circular(25),
+                                                 ),
+                                                 color: Colors.red,
+                                               ),
+                                               //color: Colors.transparent,
+                                               child:Container(
+                                                   decoration: BoxDecoration(
+                                                     borderRadius: BorderRadius.only(
+                                                       topRight: Radius.circular(25),
+                                                       topLeft:Radius.circular(25),
+                                                     ),
+                                                     color: Colors.white,
+                                                   ),
+
+                                                   child :Column(
+                                                       children:[
+                                                         Column(
+
+                                                           children: [
+                                                             //الخط
+                                                             Container(
+                                                               margin:EdgeInsets.only(top:ma1),
+                                                               height:MediaQuery.of(context).size.height*.0067,
+                                                               width: MediaQuery.of(context).size.width*.0966,
+                                                               decoration: BoxDecoration(
+                                                                   borderRadius: BorderRadius.circular(14),
+                                                                   color: Color(0xffcdced2)
+                                                               ),
+                                                             ),
+                                                             //فائمة الفائزين
+                                                             Container(
+                                                               margin: EdgeInsets.only(top: ma2),
+                                                               child: Text('قائمة الفائزين',style: TextStyle(
+                                                                   fontSize: 30,
+                                                                   fontFamily: font,
+                                                                   color: black
+                                                               ),),
+                                                             ),
+                                                             //الاختيارات
+                                                             Container(
+                                                               margin: EdgeInsets.only(top:ma3),
+                                                               child: Row(
+                                                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                                 children: [
+                                                                   nbcount(context,'+25'),
+                                                                   nbcount(context,'+20'),
+                                                                   nbcount(context,'+15'),
+                                                                   nbcount(context,'+10'),
+                                                                   nbcount(context,'+5'),
+                                                                 ],),
+                                                             ),
+                                                             Container(
+                                                               //color: purple ,
+                                                                 margin: EdgeInsets.only(top: ma4),
+                                                                 child: Column(
+                                                                   //alignment: Alignment.center,
+                                                                   children: [
+
+                                                                     Row(
+                                                                       mainAxisAlignment: MainAxisAlignment.center,
+                                                                       children: [
+                                                                         Container(
+                                                                           height: h,
+                                                                           width: w1,
+                                                                           decoration: BoxDecoration(
+                                                                             borderRadius: BorderRadius.circular(20),
+                                                                             color: Color(0xff072045),
+                                                                           ),
+                                                                           child:Stack(
+                                                                               alignment: Alignment.center,
+                                                                               children:[
+                                                                                 CircleAvatar(
+                                                                                   radius:10,
+                                                                                   backgroundColor: white,),
+                                                                                 IconButton(
+                                                                                   onPressed: (){
+                                                                                     setState((){
+                                                                                      pressadd();
+                                                                                     });
+                                                                                   },
+                                                                                   icon:Icon( Icons.add,color: Color(0xff707070),size: 15,),),
+
+                                                                               ]),
+
+                                                                         ),
+                                                                         Container(
+
+                                                                           color: w ,
+                                                                           width: MediaQuery.of(context).size.width*.20,
+                                                                           height: MediaQuery.of(context).size.height*.07,
+                                                                           child: Text('$nbwinner ',
+                                                                             textAlign: TextAlign.center,
+                                                                             style: TextStyle(
+                                                                                 fontSize: 30,
+                                                                                 // fontFamily: font1,
+                                                                                 color: black
+                                                                             ),),
+                                                                         ),
+                                                                         Container(
+                                                                           height: h,
+                                                                           width: w1,
+                                                                           decoration: BoxDecoration(
+                                                                             borderRadius: BorderRadius.circular(20),
+                                                                             color: Color(0xff072045),
+                                                                           ),
+                                                                           child:Stack(
+                                                                               alignment: Alignment.center,
+                                                                               children:[
+                                                                                 CircleAvatar(
+                                                                                   radius:10,
+                                                                                   backgroundColor: white,),
+                                                                                 IconButton(
+                                                                                   onPressed: (){
+                                                                                     setState((){
+                                                                                       pressmin();
+
+                                                                                     });
+                                                                                   },
+                                                                                   icon:Icon( Icons.remove,color: Color(0xff707070),size: 15,),),
+
+                                                                               ]),
+
+                                                                         ),
+                                                                       ],),
+                                                                     Container(
+                                                                       margin: EdgeInsets.only(top: ma5),
+                                                                       child: Row(
+                                                                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                                         children: [
+                                                                           //حسنا
+                                                                           Container(
+                                                                             height: bth,
+                                                                             width: btw,
+                                                                             child: RaisedButton(
+                                                                               onPressed: (){
+                                                                                 Navigator.pop(context);
+                                                                                 print(nbwinner);
+                                                                               },
+                                                                               color: purple6,
+                                                                               elevation: 0,
+                                                                               shape: OutlineInputBorder(
+                                                                                   borderRadius: BorderRadius.circular(radius5),
+                                                                                   borderSide: BorderSide(width: 0,color: purple6)
+                                                                               ),
+                                                                               child: Text('حسنا',style:TextStyle(
+                                                                                   fontFamily: font,
+                                                                                   color: white,
+                                                                                   fontSize: 24
+                                                                               )),
+
+                                                                             ),
+                                                                           ),
+                                                                           //إلغاء
+                                                                           Container(
+                                                                             height: bth,
+                                                                             width: btw,
+                                                                             child: RaisedButton(
+                                                                               onPressed: (){
+                                                                                 Navigator.pop(context);
+                                                                                 setState((){
+                                                                                   nbwinner=0;
+                                                                                 });
+                                                                               },
+                                                                               color: gray3,
+                                                                               shape: OutlineInputBorder(
+                                                                                   borderRadius: BorderRadius.circular(radius5),
+                                                                                   borderSide: BorderSide(width: 0,color: gray3)
+                                                                               ),
+                                                                               child: Text('إلغاء',style:TextStyle(
+                                                                                   fontFamily: font,
+                                                                                   color: black,
+                                                                                   fontSize: 24
+                                                                               )),
+
+                                                                             ),
+                                                                           ),
+                                                                         ],
+                                                                       ),
+                                                                     ),
+                                                                   ],
+                                                                 )
+                                                             ),
 
 
-                                return StatefulBuilder(
-                                     builder: (BuildContext context, StateSetter setState) {
-                                       double bth=MediaQuery.of(context).size.height*.0665;
-                                       double btw=MediaQuery.of(context).size.width*.4358;
-                                return Container(
-                                  height:MediaQuery.of(context).size.height*.4524 ,
-                                  width:MediaQuery.of(context).size.width ,
+                                                           ],
+                                                         ),
 
 
-
-                                 // color:Colors.transparent,
-                                  child:
-                                    Container(
-                                    /*  decoration: BoxDecoration(
-                                          color:white,
-                                          borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(25),
-                                            topLeft: Radius.circular(25),
-
-                                          )
-                                      ),*/
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        children: [
-                                          ////bar
-                                          Container(
-                                            margin:EdgeInsets.only(top:ma1),
-                                            height:MediaQuery.of(context).size.height*.0067,
-                                            width: MediaQuery.of(context).size.width*.0966,
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(14),
-                                              color: Color(0xffcdced2)
-                                            ),
-                                          ),
-                                          //txt of winnern numbers
-                                          Container(
-                                            margin: EdgeInsets.only(top: ma2),
-                                            child: Text(str_putwnb,style: TextStyle(
-                                              fontSize: 30,
-                                              fontFamily: font,
-                                              color: black
-                                            ),),
-                                          ),
-                                          //number choices
-                                          Container(
-                                            margin: EdgeInsets.only(top:ma3),
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                nbcount(context,'+25'),
-                                                nbcount(context,'+20'),
-                                                nbcount(context,'+15'),
-                                                nbcount(context,'+10'),
-                                                nbcount(context,'+5'),
-                                            ],),
-                                          ),
-                                          //add
-                                          Container(
-                                              //color: purple ,
-                                              margin: EdgeInsets.only(top: ma4),
-                                            child: Stack(
-                                              alignment: Alignment.center,
-                                              children: [
-                                                Container(
-
-                                                  color: gray3 ,
-                                                  width: MediaQuery.of(context).size.width*.46,
-                                                  height: MediaQuery.of(context).size.height*.07,
-                                                  child: Text('$nbwin',
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                    fontSize: 35,
-                                                    fontFamily: font1,
-                                                    color: black
-                                                  ),),
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                  children: [
-                                                  addw(context,pressadd,true),
-
-                                                  addw(context,pressmin,false)
-                                                ],),
-                                              ],
-                                            )
-                                          ),
-                                          //buttons
-                                          Container(
-                                            margin: EdgeInsets.only(top: ma5),
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                //حسنا
-                                                Container(
-                                                  height: bth,
-                                                  width: btw,
-                                                  child: RaisedButton(
-                                                    onPressed: (){
-                                                      Navigator.pop(context);
-                                                    },
-                                                    color: purple6,
-                                                    elevation: 0,
-                                                    shape: OutlineInputBorder(
-                                                      borderRadius: BorderRadius.circular(radius5),
-                                                        borderSide: BorderSide(width: 0,color: purple6)
-                                                    ),
-                                                    child: Text('حسنا',style:TextStyle(
-                                                      fontFamily: font,
-                                                      color: white,
-                                                      fontSize: 24
-                                                    )),
-
-                                                  ),
-                                                ),
-                                                //إلغاء
-                                                Container(
-                                                  height: bth,
-                                                  width: btw,
-                                                  child: RaisedButton(
-                                                    onPressed: (){
-                                                      Navigator.pop(context);
-                                                      setState((){
-                                                        nbwin=0;
-                                                      });
-                                                    },
-                                                    color: gray3,
-                                                    shape: OutlineInputBorder(
-                                                      borderRadius: BorderRadius.circular(radius5),
-                                                      borderSide: BorderSide(width: 0,color: gray3)
-                                                    ),
-                                                    child: Text('إلغاء',style:TextStyle(
-                                                        fontFamily: font,
-                                                        color: black,
-                                                        fontSize: 24
-                                                    )),
-
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                                                       ])));}
+                                     );
+                                   },
+                                 );
+                               },
+                             );
+                           });
 
 
-                                );
-                              });});
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Image.asset('assets/images/poly.png'),
-                            Text(
-                              str_win,
+                            (nbwinner==0)?
+                            Text( str_win,
                               style: TextStyle(
                                   fontFamily: font, fontSize: 18, color: gray2),
-                            ),
+                            ):Text('$nbwinner', style: TextStyle(
+                                fontFamily: font, fontSize: 18, color: black)),
                           ],
                         ),
                       ),
@@ -806,7 +897,9 @@ class giftstate extends State<gift> {
                     height: btnh,
                     child: RaisedButton(
                       color: purple3,
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pushNamedAndRemoveUntil('/gif',(Route<dynamic>route)=>false);
+                      },
                       child: Text(str_startg,
                           style: TextStyle(
                               fontSize: 19, fontFamily: font, color: white)),
