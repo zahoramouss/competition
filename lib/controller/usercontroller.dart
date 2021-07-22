@@ -15,7 +15,7 @@ class userController{
     String myUrl='$url/login';
     int p=1;
    try{
-     http.Response res =await http.post(myUrl,
+     http.Response res =await http.post( Uri.parse(myUrl),
          headers: {
            'Authorization':'application/json'
          },
@@ -29,8 +29,9 @@ class userController{
      var data = json.decode(res.body);
       state=data['success'];
      token=data["data"]["token"];
-     print(token);
+     //print(token);
      await save(token);
+     print(state);
    }
    catch(e){
      print(e.toString());
@@ -40,7 +41,7 @@ class userController{
   ////add user
   adduser(String name,String pass,String cpass)async{
     String myUrl='$url/register';
-    http.Response res =await http.post(myUrl,
+    http.Response res =await http.post(Uri.parse(myUrl),
         headers: {
           'Authorization':'application/json'
         },
@@ -61,7 +62,7 @@ class userController{
     String t=await read();
     print('token is $t');
     try{
-      http.Response res =await http.post(myUrl,
+      http.Response res =await http.post(Uri.parse(myUrl),
           headers: {
             'Accept':'application/json',
             'Authorization':'Bearer $t'
@@ -85,7 +86,7 @@ class userController{
     print(t);
    //print('token is $t');
    try{
-     http.Response res=await http.post(myUrl,
+     http.Response res=await http.post(Uri.parse(myUrl),
          headers: {
            'Accept':'application/json',
            'Authorization':'Bearer $t'
@@ -96,7 +97,7 @@ class userController{
     u.forEach((user) {
        l.add(User.fromJson(user));
      });
-     print(l);
+     print('show users $l');
      return l;
    }
    catch(e){
@@ -107,7 +108,7 @@ class userController{
 //// changeAdmin password
  chanceAdminpas(String pass,String reppass)async{
     String myUrl='$url/';
-    http.Response res=await  http.post(myUrl,
+    http.Response res=await  http.post(Uri.parse(myUrl),
         headers:{
           'Accept':'application/json',
           'Authorization':'Bearer $token'

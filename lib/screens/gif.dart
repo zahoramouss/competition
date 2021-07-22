@@ -1,5 +1,5 @@
 import'package:flutter/material.dart';
-import 'package:flutter_gifimage/flutter_gifimage.dart';
+
 import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:video_player/video_player.dart';
 class gif extends StatefulWidget{

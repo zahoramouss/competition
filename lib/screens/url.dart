@@ -27,6 +27,7 @@ class urlstate extends State<url>{
     double m4=MediaQuery.of(context).size.height*.0407;
    // double m5=MediaQuery.of(context).size.height;
   return Scaffold(
+
     body: Container(
       decoration: BoxDecoration(
       gradient:LinearGradient(
@@ -35,7 +36,10 @@ class urlstate extends State<url>{
     end: Alignment.bottomRight,
     ),
     ),
-    child: Column(
+    child:Container(
+      height:MediaQuery.of(context).size.height,
+    child:SingleChildScrollView(
+    child:Column(
       children: [
         Container(
           margin: EdgeInsets.only(top: m1),
@@ -124,7 +128,7 @@ class urlstate extends State<url>{
       ],
     ),
 
-    ),
+    )))
   );
   }
 }

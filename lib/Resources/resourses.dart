@@ -27,4 +27,5 @@ double radius4=11;
 double radius5=13;
 ///////////////////////
 File im;
+File io;
 List<ElemComment> l=List<ElemComment>();

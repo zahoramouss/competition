@@ -24,13 +24,13 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_spinkit: "^4.1.2"
-  image_picker: ^0.6.7+22
-  http: ^0.12.2
-  shared_preferences: ^0.5.12+4
-  flutter_gifimage: ^1.0.1
+  image_picker: ^0.8.2
+  http: ^0.13.3
+  shared_preferences: ^2.0.6
 
-  html: ^0.13.3+1
-  path_provider: ^1.6.27
+
+  html: ^0.13.2
+  path_provider: ^2.0.2
   webview_flutter:
   provider:
   flutter_inappwebview: ^5.3.2

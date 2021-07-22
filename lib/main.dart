@@ -14,8 +14,7 @@ void main()async {
   //userController ty=userController();
  //await ty.deleteuser(5);
 runApp(MaterialApp(
-
-  home: login(),
+    home: login(),
   routes: {
 
     '/giftrule':(BuildContext context)=> gift(),

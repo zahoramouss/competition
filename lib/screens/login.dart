@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../Resources/Strings.dart';
 import '../Resources/resourses.dart';
 import '../controller/usercontroller.dart';
+import '../widgets/add.dart';
 class login extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
@@ -18,12 +19,18 @@ class loginstate extends State<login>{
   log()async{
   if(username.text.trim().isNotEmpty&&password.text.trim().isNotEmpty){
     us.Loginuser(username.text.trim(),password.text.trim()).whenComplete((){
-
-       Navigator.of(context).pushNamedAndRemoveUntil('/url',(Route<dynamic>route)=>false);
+       if(us.state){
+       print('${us.state} is');
+       Navigator.of(context).pushNamedAndRemoveUntil('/url',(Route<dynamic>route)=>false);}
+       else{
+         showdial(context,'تاكد من كلمة السر واسم المستخدم');
+        }
 
     });
   }
-  else{}
+  else{
+    showdial(context,'الرجاء ملأ مل الحقول');
+  }
   }
   @override
   Widget build(BuildContext context) {

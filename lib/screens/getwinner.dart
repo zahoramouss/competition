@@ -24,21 +24,23 @@ class winner extends StatefulWidget{
 class winnerstate extends State<winner>{
   InAppWebViewController webView;
   String myurl;
-
+  File imgh;
   ScrollController listController;
 
   List<Competitor> y=[Competitor('@hamied','hi',false,null),Competitor('@zaho','goodluck',false,null),Competitor('@aymen','hi',false,null),Competitor('@mohamed','takecre',false,null),Competitor('@zaki','helloloya',false,null),Competitor('@mohamed','takecre',false,null)];
   File imageFile;
   final picker=ImagePicker();
   chooseim(ImageSource source)async {
+    imageCache.maximumSize=0;
+    imageCache.clear();
     final pickedFile = await picker.getImage(source: source);
     setState(() {
       imageFile = File(pickedFile.path);
       setState(() {
-        im=imageFile;
+     io=imageFile;
 
       });
-      (im==null)?print('isnill'):print('not null');
+
     });
   }
 
@@ -48,7 +50,9 @@ class winnerstate extends State<winner>{
 
   @override
   void initState() {
-    myurl = widget.url;
+    myurl = (widget.url).split('?')[0];
+   String n =myurl.split('?')[0];
+   print(n);
     print('myurl                        $myurl');
    // if(myurl!=null || myurl=='')
       //myurl = "https://www.instagram.com/p/CRFDbnTDRoX/";
@@ -183,7 +187,7 @@ class winnerstate extends State<winner>{
         ),
       ),
 
-      child:Expanded(
+      //child:Expanded(
       child:Column(
         children: [
           Container(
@@ -204,8 +208,19 @@ class winnerstate extends State<winner>{
                    width: 1),
                   ),
                   child: RaisedButton(
-                    onPressed: (){
-                      im=chooseim(ImageSource.gallery);
+                    onPressed: ()async{
+                      await chooseim(ImageSource.gallery);
+                      imgh=io;
+                      if(imgh==null){
+                        print('no image');
+                      }else{
+                        print('exist image ');
+                      setState((){
+
+                   im=imgh;
+
+                      });
+                      }
                     },
                       child:Text(str_choice,textAlign: TextAlign.center,
                       style: TextStyle(
@@ -244,8 +259,8 @@ class winnerstate extends State<winner>{
                            margin: EdgeInsets.only(left: mw1,right: mw2),
                            child:  GestureDetector(
                              onTap: ()async{
-                               chooseim(ImageSource.gallery);
-                               listUserComment[index].img= chooseim(ImageSource.gallery);
+                               await chooseim(ImageSource.gallery);
+                               listUserComment[index].img= await chooseim(ImageSource.gallery);
 
 
                              },
@@ -330,7 +345,7 @@ class winnerstate extends State<winner>{
           ),
         ],
       ),
-      )),]
+      ),]
   ));
 
 
