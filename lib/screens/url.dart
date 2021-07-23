@@ -27,7 +27,7 @@ class urlstate extends State<url>{
     double m4=MediaQuery.of(context).size.height*.0407;
    // double m5=MediaQuery.of(context).size.height;
   return Scaffold(
-
+      resizeToAvoidBottomInset: false,
     body: Container(
       decoration: BoxDecoration(
       gradient:LinearGradient(

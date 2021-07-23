@@ -45,7 +45,10 @@ class loginstate extends State<login>{
     double m6=MediaQuery.of(context).size.height*.036;
     double m7=MediaQuery.of(context).size.height*.039;
    return Scaffold(
-     body: Container(
+     backgroundColor: Colors.transparent,
+     //resizeToAvoidBottomInset: false,
+     body:
+     Container(
      alignment: Alignment.center,
        width: MediaQuery.of(context).size.width,
        height: MediaQuery.of(context).size.height,

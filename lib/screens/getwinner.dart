@@ -260,7 +260,7 @@ class winnerstate extends State<winner>{
                            child:  GestureDetector(
                              onTap: ()async{
                                await chooseim(ImageSource.gallery);
-                               listUserComment[index].img= await chooseim(ImageSource.gallery);
+                               listUserComment[index].img= io;
 
 
                              },

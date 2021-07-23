@@ -11,7 +11,7 @@ class option extends StatefulWidget{
   }
   class optionstate extends State<option>{
     b(){
-      Navigator.of(context).pushNamedAndRemoveUntil('/options',(Route<dynamic>route)=>false);
+      Navigator.of(context).pushNamedAndRemoveUntil('/url',(Route<dynamic>route)=>false);
     }
   @override
   Widget build(BuildContext context) {

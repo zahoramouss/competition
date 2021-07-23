@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../Resources/Strings.dart';
 import '../Resources/resourses.dart';
 import '../controller/usercontroller.dart';
+import '../widgets/add.dart';
 class changepass extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
@@ -20,12 +21,14 @@ class changepasswordstate extends State<changepass>{
     if(t1.text.trim().isNotEmpty&&t2.text.trim().isNotEmpty){
       if(t1.text.trim()==t2.text.trim()){
         us.chanceAdminpas(t1.text.trim(), t2.text.trim()).whenComplete((){
-
+          showdial(context,' تمت العملية بنجاح');
 
         });
       }
 
-    }else{}
+    }else{
+      showdial(context,'تاكد من اتصالك بالانترنت');
+    }
 
   }
   @override
@@ -37,6 +40,7 @@ class changepasswordstate extends State<changepass>{
     double m4=MediaQuery.of(context).size.height*.03;
     double m5=MediaQuery.of(context).size.height*.10;
   return Scaffold(
+    resizeToAvoidBottomInset: false,
     body: Container(
       height:MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,

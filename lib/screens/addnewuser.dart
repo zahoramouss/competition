@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../Resources/Strings.dart';
 import '../Resources/resourses.dart';
 import '../controller/usercontroller.dart';
+import '../widgets/add.dart';
 class adduser extends StatefulWidget{
 
   @override
@@ -21,12 +22,19 @@ class adduser extends StatefulWidget{
          us.adduser(t1.text.trim(), t2.text.trim(),t3.text.trim()).whenComplete((){
            if(us.state){
              print('sucess');
+             showdial(context,' تمت العملية بنجاح');
+           }   else   {
+             showdial(context,'تاكد من اتصالك بالانترنت');
            }
          });
-         
-       }else{}
+
+       }else{
+         showdial(context,'كلمتا السر غير متطابقتين');
+       }
       }
-      else{}
+      else{
+        showdial(context,' الرجاء ملأ كل الحقول  ');
+      }
     }
     //backfuction
 
@@ -39,6 +47,7 @@ class adduser extends StatefulWidget{
     double m4=MediaQuery.of(context).size.height*.0326;
     double m5=MediaQuery.of(context).size.height*.05;
  return Scaffold(
+   resizeToAvoidBottomInset: false,
    body: Container(
      height:MediaQuery.of(context).size.height,
      width: MediaQuery.of(context).size.width,
