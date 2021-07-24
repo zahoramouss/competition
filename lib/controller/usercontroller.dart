@@ -10,6 +10,7 @@ class userController{
   String url='https://winner-api.herokuapp.com/api';
   String token='';
   bool state;
+  int g;
   ////login
   Loginuser(String name,String pass)async{
     String myUrl='$url/login';
@@ -29,9 +30,11 @@ class userController{
      var data = json.decode(res.body);
       state=data['success'];
      token=data["data"]["token"];
-     //print(token);
+      g=data["data"]["is_admin"];
+
+    print(g);
      await save(token);
-     print(state);
+     //print(state);
    }
    catch(e){
      print(e.toString());

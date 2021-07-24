@@ -5,6 +5,7 @@ import '../Resources/Strings.dart';
 import '../Resources/resourses.dart';
 import '../controller/usercontroller.dart';
 import '../widgets/add.dart';
+import'../screens/url.dart';
 class login extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
@@ -21,7 +22,7 @@ class loginstate extends State<login>{
     us.Loginuser(username.text.trim(),password.text.trim()).whenComplete((){
        if(us.state){
        print('${us.state} is');
-       Navigator.of(context).pushNamedAndRemoveUntil('/url',(Route<dynamic>route)=>false);}
+       Navigator.push(context,new MaterialPageRoute(builder: (BuildContext context)=>new url(isadmin: us.g)));}
        else{
          showdial(context,'تاكد من كلمة السر واسم المستخدم');
         }
@@ -32,6 +33,7 @@ class loginstate extends State<login>{
     showdial(context,'الرجاء ملأ مل الحقول');
   }
   }
+
   @override
   Widget build(BuildContext context) {
     double tw=MediaQuery.of(context).size.width*.73;
@@ -47,7 +49,10 @@ class loginstate extends State<login>{
    return Scaffold(
      backgroundColor: Colors.transparent,
      //resizeToAvoidBottomInset: false,
-     body:
+     body:Container(child:
+     SingleChildScrollView(
+     // physics: NeverScrollableScrollPhysics(),
+     child:
      Container(
      alignment: Alignment.center,
        width: MediaQuery.of(context).size.width,
@@ -61,7 +66,8 @@ class loginstate extends State<login>{
            ),
            child: SingleChildScrollView(
              child: Container(
-               width: tw,
+               //tw
+               width:tw ,
              height: MediaQuery.of(context).size.height,
              //color: Colors.amber,
              child:Column(
@@ -184,7 +190,7 @@ class loginstate extends State<login>{
            ),
            ),
 
-     ),
+     ),))
    );
   }
 

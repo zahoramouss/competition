@@ -5,12 +5,16 @@ import '../Resources/Strings.dart';
 import '../Resources/resourses.dart';
 import '../screens/getwinner.dart';
 class  url extends StatefulWidget{
+  final isadmin;
+
+  const url({Key key, this.isadmin}) : super(key: key);
   @override
   State<StatefulWidget> createState() {
  return urlstate();
   }
 }
 class urlstate extends State<url>{
+
   TextEditingController t=TextEditingController();
   b(){
     Navigator.of(context).pushNamedAndRemoveUntil('/options',(Route<dynamic>route)=>false);
@@ -47,9 +51,10 @@ class urlstate extends State<url>{
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
 
-              IconButton(icon: Image.asset('assets/images/para.png'), onPressed: (){
+              ( widget.isadmin==1)?IconButton(icon: Image.asset('assets/images/para.png'), onPressed: (){
                 Navigator.of(context).pushNamedAndRemoveUntil('/options',(Route<dynamic>route)=>false);
-              }),
+              }):Container()
+              ,
              title(context,str_title,m2),
               back(context,0,b),
 
