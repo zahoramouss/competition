@@ -203,3 +203,28 @@ Widget showdial( BuildContext context,String mess){
     );
 
   }
+  Widget buttn(context){
+
+
+    return Container(
+        height: MediaQuery.of(context).size.height*.07,
+        width: MediaQuery.of(context).size.width*.91 ,
+        child:RaisedButton(
+          onPressed: (){
+            // Navigator.of(context).pushNamedAndRemoveUntil('/giftrule',(Route<dynamic>route)=>false);
+          },
+          color: Color(0xff5656ec),
+          shape: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(17),
+            borderSide: BorderSide( color: Color(0xff5656ec),),
+          ),
+          child: Text('نهاية الهدية',
+            style: TextStyle(
+             fontFamily: font,
+                fontSize:24 ,
+                color: Color(0xffffffff)
+            ),),
+
+        )
+    );
+  }
