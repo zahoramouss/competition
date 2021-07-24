@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import '../Resources/resourses.dart';
 Widget showdial( BuildContext context,String mess){
@@ -110,3 +112,94 @@ Widget showdial( BuildContext context,String mess){
 
             }));
   });}
+  Widget cnt(context ,String name,String comment,File im){
+    double ch=MediaQuery.of(context).size.height*.0923;
+    double cw =MediaQuery.of(context).size.width*.8014;
+    double rad=14;
+    double btnh=MediaQuery.of(context).size.height*.023;
+    double btnw=MediaQuery.of(context).size.width*.10;
+    double circe=MediaQuery.of(context).size.height*.0692;
+    double font1=MediaQuery.of(context).size.width*.0435;
+    double font2=MediaQuery.of(context).size.width*.029;
+  return Center(
+      child:Container(
+        height: ch,
+        width: cw,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(14)
+        ),
+
+        child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children:[
+              ////button
+              Container(
+                padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*.006,left: 8),
+                alignment: Alignment.topLeft,
+                //color: Colors.deepPurple,
+                child: Row(
+                  children: [
+                    Container(
+                      height:btnh ,
+                      width:btnw ,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+                          color: Color(0xff564ce3)
+
+                      ),
+
+                      child:
+                      Text('ST1',
+                        textAlign: TextAlign.center,
+                        style:TextStyle(
+                            color: Color(0xffffffff),
+                            //  fontFamily: font,
+                            fontSize: (font2>12)?12:font2
+                        ),),
+                    ),
+                    Container(
+                      child: Text(name,style: TextStyle(
+                          color: Color(0xff666666),
+                          //  fontFamily: font,
+                          fontSize: 19
+                      ),),
+                    ),
+                  ],
+                ),
+              ),
+
+              Align(
+                alignment: Alignment.topRight,
+                child:  Container(
+                  //color: Colors.greenAccent,
+                  alignment: Alignment.centerRight,
+                  child: Row(
+
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(right:13),
+                        child:Text(comment,style: TextStyle(
+                            color: Color(0xff666666),
+                            //  fontFamily: font,
+                            fontSize:(font1>18)?18:font1
+                        ),),
+                      ),
+
+                      Container(child: CircleAvatar(
+                        radius: circe/2,
+                        backgroundColor:Colors.red,
+
+                      ),),
+                    ],
+                  ),
+                ),
+              )
+
+            ]
+        ),
+
+      ),
+    );
+
+  }

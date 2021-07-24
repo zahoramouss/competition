@@ -17,7 +17,7 @@ class urlstate extends State<url>{
 
   TextEditingController t=TextEditingController();
   b(){
-    Navigator.of(context).pushNamedAndRemoveUntil('/options',(Route<dynamic>route)=>false);
+    //Navigator.of(context).pushNamedAndRemoveUntil('/options',(Route<dynamic>route)=>false);
   }
   @override
   Widget build(BuildContext context) {
