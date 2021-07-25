@@ -18,7 +18,7 @@ Widget showdial( BuildContext context,String mess){
 
 
                       child: Center(
-                        child:Text('$mess',style: TextStyle( color: Colors.black,fontSize: 18,fontFamily: font),),
+                        child:Text('$mess',style: TextStyle( color: Colors.black,fontSize: 18,fontFamily: fntAdobe),),
                       )
 
 
@@ -154,14 +154,14 @@ Widget showdial( BuildContext context,String mess){
                         textAlign: TextAlign.center,
                         style:TextStyle(
                             color: Color(0xffffffff),
-                            //  fontFamily: font,
+                            //  fontFamily: fntAdobe,
                             fontSize: (font2>12)?12:font2
                         ),),
                     ),
                     Container(
                       child: Text(name,style: TextStyle(
                           color: Color(0xff666666),
-                          //  fontFamily: font,
+                          //  fontFamily: fntAdobe,
                           fontSize: 19
                       ),),
                     ),
@@ -181,7 +181,7 @@ Widget showdial( BuildContext context,String mess){
                         margin: EdgeInsets.only(right:13),
                         child:Text(comment,style: TextStyle(
                             color: Color(0xff666666),
-                            //  fontFamily: font,
+                            //  fontFamily: fntAdobe,
                             fontSize:(font1>18)?18:font1
                         ),),
                       ),
@@ -220,7 +220,7 @@ Widget showdial( BuildContext context,String mess){
           ),
           child: Text('نهاية الهدية',
             style: TextStyle(
-             fontFamily: font,
+             fontFamily: fntAdobe,
                 fontSize:24 ,
                 color: Color(0xffffffff)
             ),),

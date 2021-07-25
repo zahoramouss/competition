@@ -1,7 +1,6 @@
 import'package:flutter/material.dart';
 
 import 'package:flutter/scheduler.dart' show timeDilation;
-import 'package:video_player/video_player.dart';
 class gif extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
@@ -9,30 +8,30 @@ class gif extends StatefulWidget{
   }
 }
 class gifstate extends State<gif>{
-VideoPlayerController controller;
+//VideoPlayerController controller;
 Future <void> inialazed;
 @override
 void dispose() {
-    controller.dispose();
+  //  controller.dispose();
     super.dispose();
   }
 @override
   void initState() {
-    controller=VideoPlayerController.asset('assets/images/v.mp4');
-    inialazed=controller.initialize();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+  //  controller=VideoPlayerController.asset('assets/images/v.mp4');
+   // inialazed=controller.initialize();
+ /*   WidgetsBinding.instance.addPostFrameCallback((_) {
       // mutes the video
-     controller.setVolume(0);
+   //  controller.setVolume(0);
       // Plays the video once the widget is build and loaded.
-     controller.play();
-     print('hhhhhhhhhhhhh');
-    });
+   //  controller.play();
+  //   print('hhhhhhhhhhhhh');
+    });*/
 
    super.initState();
    Future.delayed( const Duration(milliseconds: 9000),
            () => "2").then((onValue) {
              print('hi');
-     Navigator.of(context).pushNamedAndRemoveUntil('/url',(Route<dynamic>route)=>false);
+     Navigator.of(context).pushNamedAndRemoveUntil('/listWinners',(Route<dynamic>route)=>false);
    });
   }
   @override

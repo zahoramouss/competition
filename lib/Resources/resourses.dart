@@ -17,8 +17,11 @@ const Color purple4=Color(0xff453db4);
 const Color purple5=Color(0xff564ce3);
 const Color purple6=Color(0xff5656ce);
 //fonts
-String font='AdobeArabic-Bold';
-String font1='AdobeArabic-Bold';
+//String font='AdobeArabic-Bold';
+//String font1='AdobeArabic-Bold';
+
+const String fntAdobe  = 'AdobeArabic';
+const String fntEloqia = 'Eloquia';
 //some duplicate variables
 double radius1=8;
 double radius2=17;
@@ -28,4 +31,6 @@ double radius5=13;
 ///////////////////////
 File im;
 File io;
-List<ElemComment> l=List<ElemComment>();
+List<ElemComment> listUserCmntGlb=List<ElemComment>();
+List<ElemComment> listWinnerGlb=List<ElemComment>();
+String cname;

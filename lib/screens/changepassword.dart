@@ -74,7 +74,7 @@ class changepasswordstate extends State<changepass>{
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 30,
-                        fontFamily: font,
+                        fontFamily: fntAdobe,
                         color: white,
                       ),)),
               ),

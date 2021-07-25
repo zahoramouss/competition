@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'screens/list_winners.dart';
 import 'screens/login.dart';
 import 'screens/addnewuser.dart';
 import 'screens/changepassword.dart';
@@ -26,6 +27,7 @@ runApp(MaterialApp(
     '/changepass':(BuildContext context)=>changepass(),
     '/users':(BuildContext context)=>showusers(),
     '/raviurl':(BuildContext context)=>integramurl(),
+    '/listWinners':(BuildContext context)=>WinnersLast(),
   }
 ));
 }

@@ -4,13 +4,10 @@ import '../widgets/widget.dart';
 import 'package:flutter/material.dart';
 import '../Resources/Strings.dart';
 import '../Resources/resourses.dart';
-import '../models/champion.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:html/parser.dart';
 import '../models/elem_commnt.dart';
-import 'package:visibility_detector/visibility_detector.dart';
 
 class winner extends StatefulWidget {
   final url;
@@ -44,14 +41,6 @@ class winnerstate extends State<winner> {
     setState(() {});
   }
 
-  List<Competitor> y = [
-    Competitor('@hamied', 'hi', false, null),
-    Competitor('@zaho', 'goodluck', false, null),
-    Competitor('@aymen', 'hi', false, null),
-    Competitor('@mohamed', 'takecre', false, null),
-    Competitor('@zaki', 'helloloya', false, null),
-    Competitor('@mohamed', 'takecre', false, null)
-  ];
   File imageFile;
   final picker = ImagePicker();
   chooseim(ImageSource source) async {
@@ -118,8 +107,9 @@ class winnerstate extends State<winner> {
             user = elem.innerHtml.split('href=\"/')[1].split('/\"')[0];
           }
         }
+        ElemComment elem= ElemComment(user: "@$user", comment: cmnt, index: k,isWiner:false );
         listUserComment
-            .add(ElemComment(user: "@$user", comment: cmnt, index: k));
+            .add(elem);
       }
 
       listUserComment.removeWhere((element) => element.user == postOwner);
@@ -133,8 +123,8 @@ class winnerstate extends State<winner> {
       setState(() {
         userDetails=listUserComment;
       });
-    });
     print(' the ${listUserComment.length}');
+    });
     //log(html);
   }
 
@@ -197,309 +187,328 @@ class winnerstate extends State<winner> {
             ),
 
             //child:Expanded(
-            child: Column(
-              children: [
-                Container(
-                    margin: EdgeInsets.only(top: m1),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                      margin: EdgeInsets.only(top: m1),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
 ////img
-                        Container(
-                          height: ch1,
-                          width: cw1,
-                          alignment: Alignment.center,
-                          margin: EdgeInsets.only(right: 50),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(radius1),
-                            color: blue,
-                            border: Border.all(color: white, width: 1),
-                          ),
-                          child: RaisedButton(
-                            elevation: 0.0,
-                            color: Colors.transparent,
-                            onPressed: () async {
-                              await chooseim(ImageSource.gallery);
-                              imgh = io;
-                              if (imgh == null) {
-                                print('no image');
-                              } else {
-                                print('exist image ');
-                                setState(() {
-                                  im = imgh;
-                                });
-                              }
-                            },
-                            child: Text(
-                              str_choice,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 21,
-                                fontFamily: font,
-                                color: white,
+                          Container(
+                            height: ch1,
+                            width: cw1,
+                            alignment: Alignment.center,
+                            margin: EdgeInsets.only(right: 50),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(radius1),
+                              color: blue,
+                              border: Border.all(color: white, width: 1),
+                            ),
+                            child: RaisedButton(
+                              elevation: 0.0,
+                              color: Colors.transparent,
+                              onPressed: () async {
+                                await chooseim(ImageSource.gallery);
+                                imgh = io;
+                                if (imgh == null) {
+                                  print('no image');
+                                } else {
+                                  print('exist image ');
+                                  setState(() {
+                                    im = imgh;
+                                  });
+                                }
+                              },
+                              child: Text(
+                                str_choice,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 21,
+                                  fontFamily: fntAdobe,
+                                  color: white,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        back(context, 0, b),
-                      ],
-                    )),
-                title(context, str_cnames, m2),
-                Container(
-                  width: cw,
-                  //// height: ,
-                  child: TextField(
-                    controller: t,
-                    onChanged: onSearchTextChanged,
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(
-                      hintText: 'بحث',
-                      contentPadding: EdgeInsets.zero,
-                      hintStyle: TextStyle(
-                          fontFamily: font, color: white, fontSize: 30),
-                      filled: true,
-                      fillColor: blue,
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.all(Radius.circular(radius1)),
-                        borderSide: BorderSide(
-                          color: white,
-                          width: 1,
-                        ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.all(Radius.circular(radius1)),
-                        borderSide: BorderSide(
-                          color: white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                ((searchResult.length != 0) || (t.text.isNotEmpty))
-                    ? Container(
-                        height: ch,
-                        width: cw,
-                        margin: EdgeInsets.only(top: m3),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(radius2),
-                          color: white,
-                        ),
-                        child: (userDetails.length == 0)
-                            ? (Center(child: CircularProgressIndicator()))
-                            : ListView.builder(
-                                itemCount: userDetails.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return Container(
-                                      child: Column(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.only(
-                                                left: mw1, right: mw2),
-                                            child: GestureDetector(
-                                              onTap: () async {
-                                                await chooseim(
-                                                    ImageSource.gallery);
-                                                userDetails[index].img = io;
-                                              },
-                                              child: Image.asset(
-                                                'assets/images/img.png',
-                                              ),
-                                            ),
-                                          ),
-                                          /*GestureDetector(
-                                 onTap: (){
-                                setState(() {
-                                  y[index].isWin=!y[index].isWin;
-                                });
-                                 },
-                                 child: CircleAvatar(
-                                   radius: 7.5,
-                                   backgroundColor: ( y[index].isWin)?Colors.blue : Colors.red,
-                                 )
-                             ),*/
-                                          IconButton(
-                                              icon: Icon(
-                                                Icons.circle,
-                                                color: ((userDetails[index]
-                                                            .isWiner) ==
-                                                        true)
-                                                    ? Colors.blue
-                                                    : Colors.red,
-                                                size: 15,
-                                              ),
-                                              onPressed: () {
-                                                setState(() {
-                                                  (userDetails[index].isWiner == null) ? (userDetails[index].isWiner = true) : userDetails[index]
-                                                              .isWiner =
-                                                          !userDetails[
-                                                                  index]
-                                                              .isWiner;
-                                                });
-                                              }),
-                                          Align(
-                                              alignment: Alignment.centerRight,
-                                              child: Container(
-                                                margin:
-                                                    EdgeInsets.only(left: mw3),
-                                                //color:black,
-                                                child: Text(
-                                                  userDetails[index].user,
-                                                  style: TextStyle(
-                                                    fontFamily: font,
-                                                    fontSize: 23,
-                                                    color: black,
-                                                  ),
-                                                ),
-                                              ))
-                                        ],
-                                      ),
-                                      Divider(
-                                        color: black,
-                                        endIndent: indent, indent: indent,
-                                        // height: 1,
-                                      )
-                                    ],
-                                  ));
-                                },
-                              ),
-                      )
-                    : Container(
-                        height: ch,
-                        width: cw,
-                        margin: EdgeInsets.only(top: m3),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(radius2),
-                          color: white,
-                        ),
-                        child: (listUserComment.length == 0)
-                            ? (Center(child: CircularProgressIndicator()))
-                            : ListView.builder(
-                                itemCount: listUserComment.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return Container(
-                                      child: Column(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.only(
-                                                left: mw1, right: mw2),
-                                            child: GestureDetector(
-                                              onTap: () async {
-                                                await chooseim(
-                                                    ImageSource.gallery);
-                                                listUserComment[index].img = io;
-                                              },
-                                              child: Image.asset(
-                                                'assets/images/img.png',
-                                              ),
-                                            ),
-                                          ),
-                                          /*GestureDetector(
-                                 onTap: (){
-                                setState(() {
-                                  y[index].isWin=!y[index].isWin;
-                                });
-                                 },
-                                 child: CircleAvatar(
-                                   radius: 7.5,
-                                   backgroundColor: ( y[index].isWin)?Colors.blue : Colors.red,
-                                 )
-                             ),*/
-                                          IconButton(
-                                              icon: Icon(
-                                                Icons.circle,
-                                                color: ((listUserComment[index]
-                                                            .isWiner) ==
-                                                        true)
-                                                    ? Colors.blue
-                                                    : Colors.red,
-                                                size: 15,
-                                              ),
-                                              onPressed: () {
-                                                setState(() {
-                                                  (listUserComment[index]
-                                                              .isWiner ==
-                                                          null)
-                                                      ? (listUserComment[index]
-                                                          .isWiner = true)
-                                                      : listUserComment[index]
-                                                              .isWiner =
-                                                          !listUserComment[
-                                                                  index]
-                                                              .isWiner;
-                                                });
-                                              }),
-                                          Align(
-                                              alignment: Alignment.centerRight,
-                                              child: Container(
-                                                margin:
-                                                    EdgeInsets.only(left: mw3),
-                                                //color:black,
-                                                child: Text(
-                                                  listUserComment[index].user,
-                                                  style: TextStyle(
-                                                    fontFamily: font,
-                                                    fontSize: 23,
-                                                    color: black,
-                                                  ),
-                                                ),
-                                              ))
-                                        ],
-                                      ),
-                                      Divider(
-                                        color: black,
-                                        endIndent: indent, indent: indent,
-                                        // height: 1,
-                                      )
-                                    ],
-                                  ));
-                                },
-                              ),
-                      ),
-                Container(
-                  width: bw,
-                  height: bh,
-                  margin: EdgeInsets.only(top: m1),
-                  child: RaisedButton(
-                      color: yellow,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(radius1),
-                        side: BorderSide(color: white, width: 1),
-                      ),
-                      onPressed: () {
-                        l = listUserComment;
-                        (imageFile == null)
-                            ? print('isnill')
-                            : print('not null');
-                        Navigator.of(context).pushReplacementNamed('/raviurl');
-                      },
-                      child: Text(
-                        str_start,
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontFamily: font,
-                          color: white,
-                        ),
+                          back(context, 0, b),
+                        ],
                       )),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: m2),
-                  alignment: Alignment.center,
-                  child: Text(
-                    '$str_note1 \n     $str_note2',
-                    style: TextStyle(
-                      fontFamily: font,
-                      fontSize: 18,
-                      color: white,
+                  title(context, str_cnames, m2),
+                  SingleChildScrollView(
+                    child: Container(
+                      width: cw,
+                      //// height: ,
+                      child: TextField(
+                        controller: t,
+                        onChanged: onSearchTextChanged,
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(
+                          hintText: 'بحث',
+                          contentPadding: EdgeInsets.zero,
+                          hintStyle: TextStyle(
+                              fontFamily: fntAdobe, color: white, fontSize: 30),
+                          filled: true,
+                          fillColor: blue,
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(radius1)),
+                            borderSide: BorderSide(
+                              color: white,
+                              width: 1,
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(radius1)),
+                            borderSide: BorderSide(
+                              color: white,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ],
+                  ((searchResult.length != 0) || (t.text.isNotEmpty))
+                      ? Container(
+                          height: ch,
+                          width: cw,
+                          margin: EdgeInsets.only(top: m3),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(radius2),
+                            color: white,
+                          ),
+                          child: (userDetails.length == 0)
+                              ? (Center(child: CircularProgressIndicator()))
+                              : ListView.builder(
+                                  itemCount: userDetails.length,
+                                  itemBuilder: (BuildContext context, int index) {
+                                    return Container(
+                                        child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Container(
+                                              margin: EdgeInsets.only(
+                                                  left: mw1, right: mw2),
+                                              child: GestureDetector(
+                                                onTap: () async {
+                                                  await chooseim(
+                                                      ImageSource.gallery);
+                                                  userDetails[index].img = io;
+                                                },
+                                                child: Image.asset(
+                                                  'assets/images/img.png',
+                                                ),
+                                              ),
+                                            ),
+                                            /*GestureDetector(
+                                   onTap: (){
+                                  setState(() {
+                                    y[index].isWin=!y[index].isWin;
+                                  });
+                                   },
+                                   child: CircleAvatar(
+                                     radius: 7.5,
+                                     backgroundColor: ( y[index].isWin)?Colors.blue : Colors.red,
+                                   )
+                               ),*/
+                                            IconButton(
+                                                icon: Icon(
+                                                  Icons.circle,
+                                                  color: ((userDetails[index]
+                                                              .isWiner) ==
+                                                          true)
+                                                      ? Colors.blue
+                                                      : Colors.red,
+                                                  size: 15,
+                                                ),
+                                                onPressed: () {
+                                                  setState(() {
+                                                    (userDetails[index].isWiner == false) ? (userDetails[index].isWiner = true) : userDetails[index]
+                                                                .isWiner =
+                                                            !userDetails[
+                                                                    index]
+                                                                .isWiner;
+                                                  });
+                                                }),
+                                            Flexible(
+                                              child: Container(
+                                                 padding: EdgeInsets.zero,
+                                                 margin:EdgeInsets.only(right: mw3, ),
+                                                child: Align(
+                                                  alignment: Alignment.centerLeft,
+                                                 //  margin:EdgeInsets.only(left: mw3),
+                                                    child: Text(
+                                                       userDetails[index].user,
+                                                     textAlign:TextAlign.left,
+                                                      overflow:TextOverflow.ellipsis,
+                                                      style: TextStyle(
+                                                        fontFamily: fntAdobe,
+                                                        fontSize: 23,                                                        
+                                                        color: black,
+                                                      ),
+                                                    ),
+                                                  ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        Divider(
+                                          color: black,
+                                          endIndent: indent, indent: indent,
+                                          // height: 1,
+                                        )
+                                      ],
+                                    ));
+                                  },
+                                ),
+                        )
+                      : Container(
+                          height: ch,
+                          width: cw,
+                          margin: EdgeInsets.only(top: m3),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(radius2),
+                            color: white,
+                          ),
+                          child: (listUserComment.length == 0)
+                              ? (Center(child: CircularProgressIndicator()))
+                              : ListView.builder(
+                                  itemCount: listUserComment.length,
+                                  itemBuilder: (BuildContext context, int index) {
+                                    return Container(
+                                        child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Container(
+                                              margin: EdgeInsets.only(
+                                                  left: mw1, right: mw2),
+                                              child: GestureDetector(
+                                                onTap: () async {
+                                                  await chooseim(
+                                                      ImageSource.gallery);
+                                                  listUserComment[index].img = io;
+                                                },
+                                                child: Image.asset(
+                                                  'assets/images/img.png',
+                                                ),
+                                              ),
+                                            ),
+                                            /*GestureDetector(
+                                   onTap: (){
+                                  setState(() {
+                                    y[index].isWin=!y[index].isWin;
+                                  });
+                                   },
+                                   child: CircleAvatar(
+                                     radius: 7.5,
+                                     backgroundColor: ( y[index].isWin)?Colors.blue : Colors.red,
+                                   )
+                               ),*/
+                                            IconButton(
+                                                icon: Icon(
+                                                  Icons.circle,
+                                                  color: ((listUserComment[index]
+                                                              .isWiner) ==
+                                                          true)
+                                                      ? Colors.blue
+                                                      : Colors.red,
+                                                  size: 15,
+                                                ),
+                                                onPressed: () {
+                                                  setState(() {
+                                                    (listUserComment[index]
+                                                                .isWiner ==
+                                                            null)
+                                                        ? (listUserComment[index]
+                                                            .isWiner = true)
+                                                        : listUserComment[index]
+                                                                .isWiner =
+                                                            !listUserComment[
+                                                                    index]
+                                                                .isWiner;
+                                                  });
+                                                }),
+                                            Flexible(
+                                              child: Container(
+                                                 padding: EdgeInsets.zero,
+                                                 margin:EdgeInsets.only(right: mw3, ),
+                                                child: Align(
+                                                  alignment: Alignment.centerLeft,
+                                                    child: Text(
+                                                      listUserComment[index].user,
+                                                     textAlign:TextAlign.left,
+                                                      overflow:TextOverflow.ellipsis,
+                                                      style: TextStyle(
+                                                        fontFamily: fntAdobe,
+                                                        fontSize: 23,                                                        
+                                                        color: black,
+                                                      ),
+                                                    ),
+                                                  ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        Divider(
+                                          color: black,
+                                          endIndent: indent, indent: indent,
+                                          // height: 1,
+                                        )
+                                      ],
+                                    ));
+                                  },
+                                ),
+                        ),
+                  Container(
+                    width: bw,
+                    height: bh,
+                    margin: EdgeInsets.only(top: m1),
+                    child: RaisedButton(
+                        color: yellow,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(radius1),
+                          side: BorderSide(color: white, width: 1),
+                        ),
+                        onPressed: () {
+                          listUserCmntGlb = listUserComment;
+                          listWinnerGlb.clear();
+                          for(int i=0; i<listUserComment.length;i++)
+                            if(listUserComment[i].isWiner)
+                              listWinnerGlb.add(listUserComment[i]);
+
+                          (imageFile == null)
+                              ? print('isnill')
+                              : print('not null');
+                          Navigator.of(context).pushReplacementNamed('/raviurl');
+                        },
+                        child: Text(
+                          str_start,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontFamily: fntAdobe,
+                            color: white,
+                          ),
+                        )),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: m2),
+                    alignment: Alignment.center,
+                    child: Text(
+                      '$str_note1 \n     $str_note2',
+                      style: TextStyle(
+                        fontFamily: fntAdobe,
+                        fontSize: 18,
+                        color: white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ]));

@@ -61,7 +61,7 @@ class integramurl extends StatefulWidget{
                            padding: EdgeInsets.only(top: 3),
                            child: Image.asset('assets/images/son.png'),),
                          Text(str_setting,style: TextStyle(
-                             fontFamily: font,
+                             fontFamily: fntAdobe,
                              fontSize: 9,
                              color: white
                          ),)
@@ -88,14 +88,14 @@ class integramurl extends StatefulWidget{
                   ,
                   style: TextStyle(
                     fontSize: 34,
-                    fontFamily: font,
+                    fontFamily: fntAdobe,
                     color: white
                 ),),
                 Text('$str_copyurl2',
                     textAlign: TextAlign.end,
                   style: TextStyle(
                     fontSize: 34,
-                    fontFamily: font,
+                    fontFamily: fntAdobe,
                     color: white
                 ),)
               ],)
@@ -109,7 +109,7 @@ class integramurl extends StatefulWidget{
                child:TextField(
                  style: TextStyle(
                      color: black,
-                     fontFamily: font,
+                     fontFamily: fntAdobe,
                      fontSize: 30
                  ),
                  controller: t,
@@ -123,7 +123,7 @@ class integramurl extends StatefulWidget{
                    hintStyle: TextStyle(
 
                      color: grey,
-                     fontFamily: font,
+                     fontFamily: fntAdobe,
                      fontSize: 30
                    ),
                    focusedBorder: OutlineInputBorder(
@@ -167,7 +167,7 @@ class integramurl extends StatefulWidget{
                  },
                  child:Text(str_search,
                  style: TextStyle(
-                   fontFamily: font,
+                   fontFamily: fntAdobe,
                    color:Color(0xff6f66dd),
                    fontSize: 25,
                  ),),

@@ -28,7 +28,7 @@ dependencies:
   http: ^0.13.3
   shared_preferences: ^2.0.6
 
-
+  scrollable_positioned_list: ^0.1.10
   html: ^0.13.2
   path_provider: ^2.0.2
   webview_flutter:
@@ -79,9 +79,12 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-     - family: AdobeArabic-Bold
+     - family: AdobeArabic
        fonts:
          - asset: assets/fonts/AdobeArabicBold.otf
+     - family: Eloquia
+       fonts:
+           - asset: assets/fonts/EloquiaDisplay-ExtraBold.otf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

@@ -39,7 +39,7 @@ Widget text(context,String t,double w,double m){
     child: Text(t,
       textAlign: TextAlign.right,
       style: TextStyle(
-        fontFamily: font,
+        fontFamily: fntAdobe,
         fontSize: 31,
         color: white,
       ),),
@@ -65,8 +65,8 @@ Widget title(context,String t,double m){
     margin: EdgeInsets.only(top: m),
     alignment: Alignment.center,
     child: Text(t,style: TextStyle(
-      fontFamily: font,
-      fontSize: 51,
+      fontFamily: fntAdobe,
+      fontSize: 46,
       color: white,
     ),),
   );
@@ -103,7 +103,7 @@ Widget button(context,String t,double m,int choice){
      textAlign: TextAlign.right,
     style: TextStyle(
     fontSize: 26,
-    fontFamily: font,
+    fontFamily: fntAdobe,
       color: white,
   ),)),
 
@@ -122,7 +122,7 @@ Widget gtext(context,double imw,String s,bool pro){
         textAlign: TextAlign.end,
         style: TextStyle(
             fontSize: 19,
-            fontFamily: font,
+            fontFamily: fntAdobe,
             color: black
         )),
   );
@@ -141,7 +141,7 @@ Widget sel(context,double h,double w,String s,bool pro){
          textAlign: TextAlign.right,
       decoration: InputDecoration(
         hintStyle: TextStyle(
-            fontFamily: font,
+            fontFamily: fntAdobe,
             fontSize: 18,
             color: gray2
         ),
@@ -185,7 +185,7 @@ Widget nbcount(context,String s){
     child: Align(
       alignment: Alignment.center,
       child: Text(s, textAlign:TextAlign.center,style: TextStyle(
-        fontFamily: font,
+        fontFamily: fntAdobe,
         fontSize: 20,
         color:black,
       ),),

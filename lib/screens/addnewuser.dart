@@ -104,7 +104,7 @@ class adduser extends StatefulWidget{
                    textAlign: TextAlign.center,
                    style: TextStyle(
                    fontSize: 30,
-                   fontFamily: font,
+                   fontFamily: fntAdobe,
                    color: white,
                  ),)),
            ),

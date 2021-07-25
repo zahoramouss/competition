@@ -48,3 +48,6 @@ String str_va='عطلة , سيارة ألخ. (اختياري)';
 String str_giftpro='هدية المحترفين';
 String str_giftbase='الهدية الأساسية ';
 String str_putwnb='أدخل عدد الفاىزين'  ;
+
+
+const String str_titleWinners = 'st1 اختيار الفائز';

@@ -95,7 +95,7 @@ class showusers extends StatefulWidget{
                           children: [
                             Container(
                               child: Text('${l[p].username}',style: TextStyle(
-                                fontFamily: font,
+                                fontFamily: fntAdobe,
                                 fontSize: 30,
                                 color: black,
                               ),),

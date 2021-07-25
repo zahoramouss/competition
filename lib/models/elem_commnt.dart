@@ -5,22 +5,21 @@ class ElemComment{
   String user;
   String comment;
   int index;
-  bool isWinner;
+ // bool isWinner;
   File img;
-  bool isWiner;
+  bool isWiner=false;
  // String eventName;
   ElemComment({this.user, this.comment, this.index,this.img,this.isWiner})
   {
-    this.isWinner = this.index % 2 == 0;
+    //this.isWiner = this.index % 2 == 0;
   }
   
   factory ElemComment.fromJson(Map<String, dynamic> map) => ElemComment(
      user : map["user"],
      comment : map["comment"],
      index   : map["index"],
-    isWiner: map["isWiner"],
-    img: map["img"],
-
+     isWiner : map["isWiner"],
+     img     : map["img"],
 
   );
 
@@ -29,6 +28,8 @@ class ElemComment{
      "user"    : user,
      "comment" : comment,
      "index"   : index,
+     "isWiner" : isWiner,
+     "img"     : img
   };
 
   @override

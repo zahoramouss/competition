@@ -96,7 +96,7 @@ class giftstate extends State<gift> {
                         Text(
                           '8',
                           style: TextStyle(
-                              fontFamily: font, color: white, fontSize: 17),
+                              fontFamily: fntAdobe, color: white, fontSize: 17),
                         ),
                         Image.asset('assets/images/crown.png'),
                       ],
@@ -105,7 +105,7 @@ class giftstate extends State<gift> {
                   Text(
                     str_gift,
                     style:
-                        TextStyle(fontSize: 24, color: black, fontFamily: font),
+                        TextStyle(fontSize: 24, color: black, fontFamily: fntAdobe),
                   ),
                   /*CircleAvatar(
                   radius:cradius ,
@@ -199,7 +199,7 @@ class giftstate extends State<gift> {
                             str_giftpro,
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                fontFamily: font,
+                                fontFamily: fntAdobe,
                                 color: (pro) ? purple5 : gray2,
                                 fontSize: 19),
                           ),
@@ -224,7 +224,7 @@ class giftstate extends State<gift> {
                             str_giftbase,
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                fontFamily: font,
+                                fontFamily: fntAdobe,
                                 color: (pro) ? gray2 : purple5,
                                 fontSize: 19),
                           ),
@@ -248,7 +248,7 @@ class giftstate extends State<gift> {
                       Text(
                         'تسجيل على الشاشة',
                         style: TextStyle(
-                            fontSize: 19, fontFamily: font, color: gray2),
+                            fontSize: 19, fontFamily: fntAdobe, color: gray2),
                       ),
                       Radio(
                         activeColor: Color(0xff0c294b),
@@ -281,7 +281,7 @@ class giftstate extends State<gift> {
                       ),
                       Text('عنوان المسابقة',
                           style: TextStyle(
-                              fontFamily: font, fontSize: 19, color: black)),
+                              fontFamily: fntAdobe, fontSize: 19, color: black)),
                     ],
                   ),
                 ),
@@ -291,14 +291,14 @@ class giftstate extends State<gift> {
                   child: TextField(
                   controller: t,
                     style:TextStyle(
-                        fontFamily: font, fontSize: 19, color: black),
+                        fontFamily: fntAdobe, fontSize: 19, color: black),
                     textAlign: TextAlign.end,
                     decoration: InputDecoration(
                       filled: true,
 
                       hintText: str_tgift,
                       hintStyle: TextStyle(
-                          fontFamily: font, fontSize: 19, color: gray2),
+                          fontFamily: fntAdobe, fontSize: 19, color: gray2),
                       contentPadding: EdgeInsets.only(top: 0, right: 12),
                       fillColor: gray3,
                       focusedBorder: OutlineInputBorder(
@@ -319,7 +319,7 @@ class giftstate extends State<gift> {
                   child: Text(str_winner,
                       textAlign: TextAlign.end,
                       style: TextStyle(
-                          fontSize: 19, fontFamily: font, color: black)),
+                          fontSize: 19, fontFamily: fntAdobe, color: black)),
                 ),
                 ////
                 Container(
@@ -512,7 +512,7 @@ class giftstate extends State<gift> {
                                 Text(
                                   str_wi,
                                   style: TextStyle(
-                                      fontFamily: font,
+                                      fontFamily: fntAdobe,
                                       fontSize: 18,
                                       color: gray2),
                                 ),
@@ -591,7 +591,7 @@ class giftstate extends State<gift> {
                                                                margin: EdgeInsets.only(top: ma2),
                                                                child: Text('قائمة الفائزين',style: TextStyle(
                                                                    fontSize: 30,
-                                                                   fontFamily: font,
+                                                                   fontFamily: fntAdobe,
                                                                    color: black
                                                                ),),
                                                              ),
@@ -702,7 +702,7 @@ class giftstate extends State<gift> {
                                                                                    borderSide: BorderSide(width: 0,color: purple6)
                                                                                ),
                                                                                child: Text('حسنا',style:TextStyle(
-                                                                                   fontFamily: font,
+                                                                                   fontFamily: fntAdobe,
                                                                                    color: white,
                                                                                    fontSize: 24
                                                                                )),
@@ -726,7 +726,7 @@ class giftstate extends State<gift> {
                                                                                    borderSide: BorderSide(width: 0,color: gray3)
                                                                                ),
                                                                                child: Text('إلغاء',style:TextStyle(
-                                                                                   fontFamily: font,
+                                                                                   fontFamily: fntAdobe,
                                                                                    color: black,
                                                                                    fontSize: 24
                                                                                )),
@@ -762,9 +762,9 @@ class giftstate extends State<gift> {
                             (nbwinner==0)?
                             Text( str_win,
                               style: TextStyle(
-                                  fontFamily: font, fontSize: 18, color: gray2),
+                                  fontFamily: fntAdobe, fontSize: 18, color: gray2),
                             ):Text('$nbwinner', style: TextStyle(
-                                fontFamily: font, fontSize: 18, color: black)),
+                                fontFamily: fntAdobe, fontSize: 18, color: black)),
                           ],
                         ),
                       ),
@@ -791,7 +791,7 @@ class giftstate extends State<gift> {
                     textAlign: TextAlign.right,
                     decoration: InputDecoration(
                       hintStyle: TextStyle(
-                          fontFamily: font, fontSize: 18, color: black),
+                          fontFamily: fntAdobe, fontSize: 18, color: black),
                       hintText: str_lik,
                       filled: true,
                       prefixIcon: Image.asset('assets/images/poly.png'),
@@ -826,7 +826,7 @@ class giftstate extends State<gift> {
                     textAlign: TextAlign.right,
                     decoration: InputDecoration(
                       hintStyle: TextStyle(
-                          fontFamily: font, fontSize: 18, color: gray2),
+                          fontFamily: fntAdobe, fontSize: 18, color: gray2),
                       hintText: str_va,
                       filled: true,
                       prefixIcon: Image.asset('assets/images/poly.png'),
@@ -861,7 +861,7 @@ class giftstate extends State<gift> {
                     textAlign: TextAlign.right,
                     decoration: InputDecoration(
                       hintStyle: TextStyle(
-                          fontFamily: font, fontSize: 18, color: black),
+                          fontFamily: fntAdobe, fontSize: 18, color: black),
                       hintText: str_second,
                       filled: true,
                       fillColor: gray3,
@@ -898,11 +898,15 @@ class giftstate extends State<gift> {
                     child: RaisedButton(
                       color: purple3,
                       onPressed: () {
+                        setState(() {
+                          cname=t.text;
+                        });
+
                         Navigator.of(context).pushNamedAndRemoveUntil('/gif',(Route<dynamic>route)=>false);
                       },
                       child: Text(str_startg,
                           style: TextStyle(
-                              fontSize: 19, fontFamily: font, color: white)),
+                              fontSize: 19, fontFamily: fntAdobe, color: white)),
                       shape: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(radius3),
                           borderSide: BorderSide(color: purple3)),
@@ -924,7 +928,7 @@ class giftstate extends State<gift> {
                           padding: EdgeInsets.only(right: 5),
                           child: Text(str_nbcrown,
                               style: TextStyle(
-                                  fontFamily: font,
+                                  fontFamily: fntAdobe,
                                   color: white,
                                   fontSize: 23)),
                         ),

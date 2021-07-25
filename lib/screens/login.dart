@@ -36,7 +36,7 @@ class loginstate extends State<login>{
 
   @override
   Widget build(BuildContext context) {
-    double tw=MediaQuery.of(context).size.width*.73;
+    double tw=MediaQuery.of(context).size.width*.90;
     double btw=MediaQuery.of(context).size.width*.50;
     double bth=MediaQuery.of(context).size.height*.07;
     double m1=MediaQuery.of(context).size.height*.03;
@@ -49,10 +49,9 @@ class loginstate extends State<login>{
    return Scaffold(
      backgroundColor: Colors.transparent,
      //resizeToAvoidBottomInset: false,
-     body:Container(child:
-     SingleChildScrollView(
-     // physics: NeverScrollableScrollPhysics(),
-     child:
+     body:SingleChildScrollView(
+       child: Container(
+         child:
      Container(
      alignment: Alignment.center,
        width: MediaQuery.of(context).size.width,
@@ -70,127 +69,135 @@ class loginstate extends State<login>{
                width:tw ,
              height: MediaQuery.of(context).size.height,
              //color: Colors.amber,
-             child:Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-               crossAxisAlignment: CrossAxisAlignment.center,
-               children: [
-                 Container(
-                   margin: EdgeInsets.only(top: m1),
-                   child: Text(str_hello,
-                   style: TextStyle(
-                     fontSize: 80,
-                     fontFamily: font,
-                     color: white,
-                     fontWeight: FontWeight.w600,
-
-
-
-                   ),),
-                 ),
-                 Container(
-                   margin: EdgeInsets.only(top: m2),
-                   child: Text(
-                       '$str_text1',
+             child:SingleChildScrollView(
+               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                 crossAxisAlignment: CrossAxisAlignment.center,
+                 children: [
+                   Container(
+                     margin: EdgeInsets.only(top: m1),
+                     child: Text(str_hello,
                      style: TextStyle(
-                     fontFamily: font,
-                     fontSize: 28,
-                     color: white,
-                         fontWeight: FontWeight.w200
-                   ),),
-                   ),
-
-                 Container(
-                   child: Text( str_text2,style: TextStyle(
-                     fontFamily: font,
-                     fontSize: 28,
-                     color: white,
-                     fontWeight: FontWeight.w200
-                   ),),),
-
-                 Container(
-                   child: Text(str_text3,
-                   style: TextStyle(
-                     fontFamily: font,
-                     fontSize: 28,
-                     color: white,
-                   ),),
-                 ),
-                 Container(
-                   margin: EdgeInsets.only(top: m3),
-                     alignment: Alignment.topRight,
-                   child:Text(str_acountname,style: TextStyle(
-                     fontFamily: font,
-                     fontSize: 31,
-                     color: white,
-
-                   ),),),
-
-                 Container(child: Textfield(context,username),),
-                 Container(
-                   margin: EdgeInsets.only(top: m5),
-                   alignment: Alignment.topRight,
-                     child:Text(str_password,style: TextStyle(
-                       fontFamily: font,
-                       fontSize: 31,
-                       color: white,)
-                 ),),
-                 Textfield(context,password),
-                /*    Container(
-                      //margin: EdgeInsets.only(top:m6),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text(str_rememberme,style: TextStyle(
-                              fontSize: 28,
-                              fontFamily: font,
-                              color: white),),
-                          Container(
-                            color: white,
-                            child:Checkbox(
-                              focusColor: white,
-                              hoverColor: white,
-
-                              value: false, onChanged: (value){
-                              setState(() {
-                                value=true;
-                              });
-                            },
-
-                            ),
-
-                          )
-
-                        ],
-                      ),
-                    ),*/
-               ////button
-               Container(
-                 margin: EdgeInsets.only(top: m7),
-                 width:btw ,
-                 height: bth,
-
-                 child:   RaisedButton(
-                   color: yellow,
-                     shape: RoundedRectangleBorder(
-                       borderRadius: new BorderRadius.circular(radius1),
-                        side:BorderSide(color: white, width: 1),
-                     ),
-                     onPressed: (){
-                       log();
-                     },
-                     child:Text(str_login,style: TextStyle(
-                       fontSize: 30,
-                       fontFamily: font,
+                       fontSize: 70,
+                       fontFamily: fntAdobe,
                        color: white,
-                     ),)),
-               )
-               ],
+                       fontWeight: FontWeight.w600,
+
+
+
+                     ),),
+                   ),
+                   Container(
+                     margin: EdgeInsets.only(top: m2, bottom: 10),
+                     child: Text(
+                         '$str_text1 $str_text2 $str_text3',
+                         textAlign: TextAlign.center,
+                       style: TextStyle(
+                         
+                       fontFamily: fntAdobe,
+                       fontSize: 26,
+                       color: white,
+                           fontWeight: FontWeight.w200
+                     ),),
+                     ),
+/*
+                   Container(
+                     child: Text( str_text2,style: TextStyle(
+                       fontFamily: fntAdobe,
+                       fontSize: 28,
+                       color: white,
+                       fontWeight: FontWeight.w200
+                     ),),),
+
+                   Container(
+                     child: Text(str_text3,
+                     style: TextStyle(
+                       fontFamily: fntAdobe,
+                       fontSize: 28,
+                       color: white,
+                     ),),
+                   ),*/
+                   Container(
+                     margin: EdgeInsets.only(top: m3),
+                       alignment: Alignment.topRight,
+                     child:Text(str_acountname,style: TextStyle(
+                       fontFamily: fntAdobe,
+                       fontSize: 29,
+                       color: white,
+
+                     ),),),
+
+                   Container(child: Textfield(context,username),),
+                   Container(
+                     margin: EdgeInsets.only(top: m5),
+                     alignment: Alignment.topRight,
+                       child:Text(str_password,style: TextStyle(
+                         fontFamily: fntAdobe,
+                         fontSize: 29,
+                         color: white,)
+                   ),),
+                   Textfield(context,password),
+                  /*    Container(
+                        //margin: EdgeInsets.only(top:m6),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text(str_rememberme,style: TextStyle(
+                                fontSize: 28,
+                                fontFamily: font,
+                                color: white),),
+                            Container(
+                              color: white,
+                              child:Checkbox(
+                                focusColor: white,
+                                hoverColor: white,
+
+                                value: false, onChanged: (value){
+                                setState(() {
+                                  value=true;
+                                });
+                              },
+
+                              ),
+
+                            )
+
+                          ],
+                        ),
+                      ),*/
+                 ////button
+                 Container(
+                   margin: EdgeInsets.only(top: m7),
+                   width:btw ,
+                   height: bth,
+
+                   child:   RaisedButton(
+                     color: yellow,
+                       shape: RoundedRectangleBorder(
+                         borderRadius: new BorderRadius.circular(radius1),
+                          side:BorderSide(color: white, width: 1),
+                       ),
+                       onPressed: (){
+                         log();
+                       },
+                       child:Text(str_login,
+                       textAlign: TextAlign.center,
+                       style: TextStyle(
+                         fontSize: 29,
+                         fontFamily: fntAdobe,
+                         color: white,
+                       ),)),
+                 )
+                 ],
+               ),
              ),
            ),
            ),
 
-     ),))
+     ),
+       ),
+     )
    );
   }
 
