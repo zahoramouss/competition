@@ -28,6 +28,7 @@ class winnerstate extends State<winner> {
   List userDetails = [];
   List searchResult = [];
   ////search function
+  //هنا بدلت name بuser
   onSearchTextChanged(String text) async {
     searchResult.clear();
     if (text.isEmpty) {
@@ -35,7 +36,7 @@ class winnerstate extends State<winner> {
       return;
     }
     userDetails.forEach((userDetail) {
-      if (userDetail.name.contains(text)) searchResult.add(userDetail);
+      if (userDetail.user.contains(text)) searchResult.add(userDetail);
     });
 
     setState(() {});
@@ -270,6 +271,7 @@ class winnerstate extends State<winner> {
                       ),
                     ),
                   ),
+                  ////هنا يدلت userdetails ب searchResult
                   ((searchResult.length != 0) || (t.text.isNotEmpty))
                       ? Container(
                           height: ch,
@@ -279,10 +281,10 @@ class winnerstate extends State<winner> {
                             borderRadius: BorderRadius.circular(radius2),
                             color: white,
                           ),
-                          child: (userDetails.length == 0)
+                          child: (searchResult.length == 0)
                               ? (Center(child: CircularProgressIndicator()))
                               : ListView.builder(
-                                  itemCount: userDetails.length,
+                                  itemCount: searchResult.length,
                                   itemBuilder: (BuildContext context, int index) {
                                     return Container(
                                         child: Column(
@@ -296,7 +298,7 @@ class winnerstate extends State<winner> {
                                                 onTap: () async {
                                                   await chooseim(
                                                       ImageSource.gallery);
-                                                  userDetails[index].img = io;
+                                                  searchResult[index].img = io;
                                                 },
                                                 child: Image.asset(
                                                   'assets/images/img.png',
@@ -317,7 +319,7 @@ class winnerstate extends State<winner> {
                                             IconButton(
                                                 icon: Icon(
                                                   Icons.circle,
-                                                  color: ((userDetails[index]
+                                                  color: ((searchResult[index]
                                                               .isWiner) ==
                                                           true)
                                                       ? Colors.blue
@@ -326,9 +328,9 @@ class winnerstate extends State<winner> {
                                                 ),
                                                 onPressed: () {
                                                   setState(() {
-                                                    (userDetails[index].isWiner == false) ? (userDetails[index].isWiner = true) : userDetails[index]
+                                                    (searchResult[index].isWiner == false) ? (searchResult[index].isWiner = true) : userDetails[index]
                                                                 .isWiner =
-                                                            !userDetails[
+                                                            !searchResult[
                                                                     index]
                                                                 .isWiner;
                                                   });
@@ -341,7 +343,7 @@ class winnerstate extends State<winner> {
                                                   alignment: Alignment.centerLeft,
                                                  //  margin:EdgeInsets.only(left: mw3),
                                                     child: Text(
-                                                       userDetails[index].user,
+                                                      searchResult[index].user,
                                                      textAlign:TextAlign.left,
                                                       overflow:TextOverflow.ellipsis,
                                                       style: TextStyle(

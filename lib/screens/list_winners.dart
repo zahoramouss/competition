@@ -365,6 +365,7 @@ autoScroll()async{
                             ),
                             Column(
                               children: [
+                                ////هنا بدلت زدتهم
                                 Text(cname,style: TextStyle(
                                  color: white,
                                  fontSize: 23,
